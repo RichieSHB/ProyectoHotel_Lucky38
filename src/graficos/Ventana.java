@@ -6,14 +6,29 @@
 package graficos;
 
 
+import clases.Fotos;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import clases.Imagenfondo;
 import controlMySQL.MySqlConn;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -25,24 +40,48 @@ public class Ventana extends javax.swing.JFrame {
     /**
      * Creates new form Ventana
      */
-    
+    public ArrayList<Fotos> album = new ArrayList<Fotos>();
+    private int recorridoAlbum;
     Imagenfondo prueba = new Imagenfondo(1);
     MySqlConn conn;
     
     public Ventana(MySqlConn conn) {
+        this.recorridoAlbum = -1;
         this.conn = conn;
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenes/IconoLucky38.png")).getImage()); 
         this.setContentPane(prueba);
+        this.llenarLista();
         initComponents();
     }
 
     public Ventana() {
+        this.recorridoAlbum = -1;
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenes/IconoLucky38.png")).getImage()); 
         this.setContentPane(prueba);
         initComponents();
     }
     
-    
+    public void llenarLista(){
+        ResultSet resultados = null;
+        Statement estado = null;
+        Fotos inter = new Fotos();
+        String pie;
+        String sql = "SELECT * FROM imagenes";
+        try {
+            estado = this.conn.conn.createStatement();
+            resultados = estado.executeQuery(sql);
+            while(resultados.next()){
+                inter.setPie(resultados.getString(1));
+                inter.setIcono(resultados.getBytes(2));
+                this.album.add(inter);
+            }
+            
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error en la base de datos");
+        }
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,11 +96,11 @@ public class Ventana extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelPrin = new Imagenfondo(1);
         jPanelIn = new javax.swing.JPanel();
-        registro1 = new graficos.registro();
         jPanelOut = new javax.swing.JPanel();
         jPanelCon = new javax.swing.JPanel();
         jPanelImg = new javax.swing.JPanel();
         jPanelMuestra = new javax.swing.JPanel();
+        jLabelImagen = new javax.swing.JLabel();
         jLabelImagenesMuestra = new javax.swing.JLabel();
         jButtonAgregarImg = new javax.swing.JButton();
         jButtonSiguienteImg = new javax.swing.JButton();
@@ -89,17 +128,11 @@ public class Ventana extends javax.swing.JFrame {
         jPanelIn.setLayout(jPanelInLayout);
         jPanelInLayout.setHorizontalGroup(
             jPanelInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelInLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(registro1, javax.swing.GroupLayout.DEFAULT_SIZE, 1009, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 1036, Short.MAX_VALUE)
         );
         jPanelInLayout.setVerticalGroup(
             jPanelInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelInLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(registro1, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 514, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Registro", jPanelIn);
@@ -132,15 +165,25 @@ public class Ventana extends javax.swing.JFrame {
 
         jPanelMuestra.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabelImagen.setForeground(new java.awt.Color(0, 0, 0));
+        jLabelImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Sanguinario.png"))); // NOI18N
+        jLabelImagen.setText("Placeholder");
+
         javax.swing.GroupLayout jPanelMuestraLayout = new javax.swing.GroupLayout(jPanelMuestra);
         jPanelMuestra.setLayout(jPanelMuestraLayout);
         jPanelMuestraLayout.setHorizontalGroup(
             jPanelMuestraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 752, Short.MAX_VALUE)
+            .addGroup(jPanelMuestraLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelMuestraLayout.setVerticalGroup(
             jPanelMuestraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 359, Short.MAX_VALUE)
+            .addGroup(jPanelMuestraLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelImagen, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jLabelImagenesMuestra.setText("Imagenes de Muestra");
@@ -153,41 +196,47 @@ public class Ventana extends javax.swing.JFrame {
         });
 
         jButtonSiguienteImg.setText("Siguiente");
+        jButtonSiguienteImg.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSiguienteImgActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelImgLayout = new javax.swing.GroupLayout(jPanelImg);
         jPanelImg.setLayout(jPanelImgLayout);
         jPanelImgLayout.setHorizontalGroup(
             jPanelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelImgLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelImgLayout.createSequentialGroup()
+                .addGap(466, 466, 466)
                 .addComponent(jLabelImagenesMuestra)
-                .addGap(445, 445, 445))
+                .addGap(35, 447, Short.MAX_VALUE))
             .addGroup(jPanelImgLayout.createSequentialGroup()
-                .addGap(140, 140, 140)
-                .addComponent(jPanelMuestra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanelMuestra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(jPanelImgLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(15, 15, 15)
                 .addComponent(jButtonAgregarImg)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonSiguienteImg)
-                .addGap(35, 35, 35))
+                .addGap(20, 20, 20))
         );
         jPanelImgLayout.setVerticalGroup(
             jPanelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelImgLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addContainerGap()
                 .addComponent(jPanelMuestra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabelImagenesMuestra)
                 .addGroup(jPanelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelImgLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonSiguienteImg))
+                        .addGap(5, 5, 5)
+                        .addComponent(jLabelImagenesMuestra)
+                        .addContainerGap(60, Short.MAX_VALUE))
                     .addGroup(jPanelImgLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jButtonAgregarImg)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonAgregarImg)
+                            .addComponent(jButtonSiguienteImg))
+                        .addGap(14, 14, 14))))
         );
 
         jTabbedPane1.addTab("Imagenes", jPanelImg);
@@ -232,8 +281,46 @@ public class Ventana extends javax.swing.JFrame {
         e.setLocationRelativeTo(null);
         e.setVisible(true);
         //new AgregarImg(conn).setVisible(true);
-        
+        album.clear();
+        this.llenarLista();
     }//GEN-LAST:event_jButtonAgregarImgActionPerformed
+
+    private void jButtonSiguienteImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteImgActionPerformed
+        if (this.recorridoAlbum + 1 < this.album.size()) {
+            this.recorridoAlbum++;
+            try {
+                System.out.println("continuacion");
+                System.out.println(this.recorridoAlbum);
+                String pie = album.get(this.recorridoAlbum).getPie();
+                byte[] img = album.get(this.recorridoAlbum).getIcono();
+                BufferedImage image = null;
+                InputStream in = new ByteArrayInputStream(img);
+                image = ImageIO.read(in);
+                ImageIcon imgi = new ImageIcon(image.getScaledInstance(1012, 415, 0));
+                this.jLabelImagen.setIcon(imgi);
+                this.jLabelImagen.setText("");
+                this.jLabelImagenesMuestra.setText(pie);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
+        }else{
+            this.recorridoAlbum = 0;
+            System.out.println("Reinicio");
+            try {
+                String pie = album.get(this.recorridoAlbum).getPie();
+                byte[] img = album.get(this.recorridoAlbum).getIcono();
+                BufferedImage image = null;
+                InputStream in = new ByteArrayInputStream(img);
+                image = ImageIO.read(in);
+                ImageIcon imgi = new ImageIcon(image.getScaledInstance(1012, 415, 0));
+                this.jLabelImagen.setIcon(imgi);
+                this.jLabelImagen.setText("");
+                this.jLabelImagenesMuestra.setText(pie);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, ex);
+            }
+        }
+    }//GEN-LAST:event_jButtonSiguienteImgActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,6 +360,7 @@ public class Ventana extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgregarImg;
     private javax.swing.JButton jButtonSiguienteImg;
+    private javax.swing.JLabel jLabelImagen;
     private javax.swing.JLabel jLabelImagenesMuestra;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCon;
@@ -282,7 +370,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelOut;
     private javax.swing.JPanel jPanelPrin;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private graficos.registro registro1;
     // End of variables declaration//GEN-END:variables
 }
 
