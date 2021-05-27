@@ -79,6 +79,7 @@ public class Ventana extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error en la base de datos");
+            //System.out.println(ex);
         }
         
     }

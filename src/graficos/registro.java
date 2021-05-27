@@ -5,6 +5,8 @@
  */
 package graficos;
 import controlMySQL.MySqlConn;
+import java.awt.HeadlessException;
+import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
@@ -14,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  * @author roy_z
  */
 public class registro extends javax.swing.JPanel {
-     MySqlConn conn;
+     MySqlConn conn = new MySqlConn();
     /**
      * Creates new form registro
      */
@@ -170,6 +172,11 @@ public class registro extends javax.swing.JPanel {
 
         jButtonLimpiar.setFont(new java.awt.Font("MS UI Gothic", 1, 12)); // NOI18N
         jButtonLimpiar.setText("LIMPIAR");
+        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarActionPerformed(evt);
+            }
+        });
 
         jButtonMostrar.setFont(new java.awt.Font("MS UI Gothic", 1, 12)); // NOI18N
         jButtonMostrar.setText("MOSTRAR");
@@ -372,6 +379,7 @@ public class registro extends javax.swing.JPanel {
         else
         {
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            //SimpleDateFormat formato2 = new SimpleDateFormat("yyyy-MM-dd");
             //instanseo de variables
             nombre = this.jTextFieldNombre.getText().trim();
             ciudad = this.jTextFieldCiudad.getText().trim();
@@ -384,10 +392,15 @@ public class registro extends javax.swing.JPanel {
             
             try
             {
-                String query = "insert into registro (num_habitacion, nombre, ciudad, fecha_llegada, fecha_salida, tipo_habitacion, num_personas, num_piso) VALUES ("
+                String query = "INSERT INTO registro(num_habitacion, nombre, ciudad, fecha_llegada, fecha_salida, tipo_habitacion, num_personas, num_piso) VALUES ("
                         + "'" + numHabitacion + "','" + nombre + "','" + ciudad + "','" + formato.format(this.jDateChooserFechaLlegada.getDate())
                         + "','" + formato.format(this.jDateChooserFechaSalida.getDate()) + "','" + tipoHabitacion + "','" + numPersonas + "','" + numPiso + "')";
-                this.conn.Update(query);
+                //INSERT INTO `registro`(`num_habitacion`, `nombre`, `ciudad`, `fecha_llegada`, `fecha_salida`, `tipo_habitacion`, `num_personas`, `num_piso`) VALUES (
+//                String query = "insert into registro (num_habitacion, nombre, ciudad, fecha_llegada, fecha_salida, tipo_habitacion, num_personas, num_piso) VALUES ("
+//                        + "'" + numHabitacion + "','" + nombre + "','" + ciudad + "','" + formato.format(this.jDateChooserFechaLlegada.getDate())
+//                        + "','" + formato.format(this.jDateChooserFechaSalida.getDate()) + "','" + tipoHabitacion + "','" + numPersonas + "','" + numPiso + "')";
+                //PreparedStatement pst = conn.conn.prepareStatement(query);
+                int j = this.conn.Update(query);
                 JOptionPane.showMessageDialog(this, "Informacion subida");//(true, "Informacion subida");
             }catch(Exception ex)
             {
@@ -437,6 +450,15 @@ public class registro extends javax.swing.JPanel {
 //            
 //        }
     }//GEN-LAST:event_jSpinnerNumeroPersonaAncestorMoved
+
+    private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
+        // TODO add your handling code here:
+        this.jTextFieldCiudad.setText("");
+        this.jTextFieldHabitacionNumero.setText("");
+        this.jTextFieldLimiteHuesped.setText("");
+        this.jTextFieldNombre.setText("");
+        
+    }//GEN-LAST:event_jButtonLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
