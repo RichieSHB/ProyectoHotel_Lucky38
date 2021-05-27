@@ -64,13 +64,13 @@ public class Ventana extends javax.swing.JFrame {
     public void llenarLista(){
         ResultSet resultados = null;
         Statement estado = null;
-        Fotos inter = new Fotos();
         String pie;
         String sql = "SELECT * FROM imagenes";
         try {
             estado = this.conn.conn.createStatement();
             resultados = estado.executeQuery(sql);
             while(resultados.next()){
+                Fotos inter = new Fotos();
                 inter.setPie(resultados.getString(1));
                 inter.setIcono(resultados.getBytes(2));
                 this.album.add(inter);
@@ -293,6 +293,7 @@ public class Ventana extends javax.swing.JFrame {
                 System.out.println(this.recorridoAlbum);
                 String pie = album.get(this.recorridoAlbum).getPie();
                 byte[] img = album.get(this.recorridoAlbum).getIcono();
+                System.out.println(pie);
                 BufferedImage image = null;
                 InputStream in = new ByteArrayInputStream(img);
                 image = ImageIO.read(in);
