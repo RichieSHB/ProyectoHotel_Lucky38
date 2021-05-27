@@ -18,11 +18,14 @@ public class main {
 
     public main() {
         //new Ventana().setVisible(true);
+        
         Portada hotel = new Portada(objconn);
         hotel.setLocationRelativeTo(null);
         hotel.setVisible(true);
+        
         //new Login(objconn).setVisible(true);
      //   new Portada(objconn).setVisible(true);
+        //new registro(objconn).setVisible(true);
     }
     
     

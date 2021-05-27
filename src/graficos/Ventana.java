@@ -92,10 +92,12 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        registro1 = new graficos.registro();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelPrin = new Imagenfondo(1);
         jPanelIn = new javax.swing.JPanel();
+        registro2 = new graficos.registro();
         jPanelOut = new javax.swing.JPanel();
         jPanelCon = new javax.swing.JPanel();
         jPanelImg = new javax.swing.JPanel();
@@ -115,7 +117,7 @@ public class Ventana extends javax.swing.JFrame {
         jPanelPrin.setLayout(jPanelPrinLayout);
         jPanelPrinLayout.setHorizontalGroup(
             jPanelPrinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1036, Short.MAX_VALUE)
+            .addGap(0, 1110, Short.MAX_VALUE)
         );
         jPanelPrinLayout.setVerticalGroup(
             jPanelPrinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,20 +130,26 @@ public class Ventana extends javax.swing.JFrame {
         jPanelIn.setLayout(jPanelInLayout);
         jPanelInLayout.setHorizontalGroup(
             jPanelInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1036, Short.MAX_VALUE)
+            .addGroup(jPanelInLayout.createSequentialGroup()
+                .addComponent(registro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanelInLayout.setVerticalGroup(
             jPanelInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addGroup(jPanelInLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(registro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Registro", jPanelIn);
+        //jPanelIn.add(new registro(conn).setVisible(true));
 
         javax.swing.GroupLayout jPanelOutLayout = new javax.swing.GroupLayout(jPanelOut);
         jPanelOut.setLayout(jPanelOutLayout);
         jPanelOutLayout.setHorizontalGroup(
             jPanelOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1036, Short.MAX_VALUE)
+            .addGap(0, 1110, Short.MAX_VALUE)
         );
         jPanelOutLayout.setVerticalGroup(
             jPanelOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,7 +162,7 @@ public class Ventana extends javax.swing.JFrame {
         jPanelCon.setLayout(jPanelConLayout);
         jPanelConLayout.setHorizontalGroup(
             jPanelConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1036, Short.MAX_VALUE)
+            .addGap(0, 1110, Short.MAX_VALUE)
         );
         jPanelConLayout.setVerticalGroup(
             jPanelConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,7 +173,6 @@ public class Ventana extends javax.swing.JFrame {
 
         jPanelMuestra.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabelImagen.setForeground(new java.awt.Color(0, 0, 0));
         jLabelImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Sanguinario.png"))); // NOI18N
         jLabelImagen.setText("Placeholder");
 
@@ -209,7 +216,7 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(jPanelImgLayout.createSequentialGroup()
                 .addGap(466, 466, 466)
                 .addComponent(jLabelImagenesMuestra)
-                .addGap(35, 447, Short.MAX_VALUE))
+                .addGap(35, 520, Short.MAX_VALUE))
             .addGroup(jPanelImgLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelMuestra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -246,8 +253,8 @@ public class Ventana extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1038, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1115, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,8 +269,7 @@ public class Ventana extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -371,6 +377,8 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelOut;
     private javax.swing.JPanel jPanelPrin;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private graficos.registro registro1;
+    private graficos.registro registro2;
     // End of variables declaration//GEN-END:variables
 }
 
