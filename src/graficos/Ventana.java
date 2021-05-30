@@ -93,12 +93,11 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        registro1 = new graficos.registro();
+        basura = new registro();
         jPanel1 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelPrin = new Imagenfondo(1);
         jPanelIn = new javax.swing.JPanel();
-        registro2 = new graficos.registro();
         jPanelOut = new javax.swing.JPanel();
         jPanelCon = new javax.swing.JPanel();
         jPanelImg = new javax.swing.JPanel();
@@ -131,16 +130,11 @@ public class Ventana extends javax.swing.JFrame {
         jPanelIn.setLayout(jPanelInLayout);
         jPanelInLayout.setHorizontalGroup(
             jPanelInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelInLayout.createSequentialGroup()
-                .addComponent(registro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGap(0, 1110, Short.MAX_VALUE)
         );
         jPanelInLayout.setVerticalGroup(
             jPanelInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelInLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(registro2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 510, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Registro", jPanelIn);
@@ -254,7 +248,7 @@ public class Ventana extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1115, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -282,15 +276,6 @@ public class Ventana extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonAgregarImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarImgActionPerformed
-        AgregarImg e = new AgregarImg(conn);
-        e.setLocationRelativeTo(null);
-        e.setVisible(true);
-        //new AgregarImg(conn).setVisible(true);
-        album.clear();
-        this.llenarLista();
-    }//GEN-LAST:event_jButtonAgregarImgActionPerformed
 
     private void jButtonSiguienteImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSiguienteImgActionPerformed
         if (this.recorridoAlbum + 1 < this.album.size()) {
@@ -330,6 +315,15 @@ public class Ventana extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonSiguienteImgActionPerformed
 
+    private void jButtonAgregarImgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarImgActionPerformed
+        AgregarImg e = new AgregarImg(conn);
+        e.setLocationRelativeTo(null);
+        e.setVisible(true);
+        //new AgregarImg(conn).setVisible(true);
+        album.clear();
+        this.llenarLista();
+    }//GEN-LAST:event_jButtonAgregarImgActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -366,6 +360,7 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private graficos.registro basura;
     private javax.swing.JButton jButtonAgregarImg;
     private javax.swing.JButton jButtonSiguienteImg;
     private javax.swing.JLabel jLabelImagen;
@@ -378,8 +373,6 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelOut;
     private javax.swing.JPanel jPanelPrin;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private graficos.registro registro1;
-    private graficos.registro registro2;
     // End of variables declaration//GEN-END:variables
 }
 

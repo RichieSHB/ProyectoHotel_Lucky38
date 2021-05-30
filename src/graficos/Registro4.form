@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jTabbedPane1" alignment="0" pref="400" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanel1">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="PISO 1">
+                <Property name="tabTitle" type="java.lang.String" value="PISO 1"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jButtonHab11" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonHab12" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonHab13" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonHab14" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonHab15" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jButtonHab6" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonHab1" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButtonHab2" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jButtonHab3" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jButtonHab4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jButtonHab5" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButtonHab7" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jButtonHab8" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jButtonHab9" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jButtonHab10" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButtonHab1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab4" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButtonHab6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab9" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab10" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButtonHab11" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab12" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab13" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab14" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab15" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="73" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="jButtonHab1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="001"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonHab1ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="002"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab3">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="003"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab4">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="004"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab5">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="005"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab10">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="010"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab9">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="009"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab8">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="008"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab7">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="007"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab6">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="006"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab11">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="011"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab12">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="012"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab13">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="013"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab14">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="014"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab15">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="015"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel2">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="PISO2">
+                <Property name="tabTitle" type="java.lang.String" value="PISO2"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jButtonHab26" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonHab27" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonHab28" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonHab29" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonHab30" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jButtonHab21" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jButtonHab16" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButtonHab17" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jButtonHab18" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jButtonHab19" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jButtonHab20" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jButtonHab22" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jButtonHab23" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jButtonHab24" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jButtonHab25" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="28" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButtonHab16" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab17" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab18" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab19" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab20" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButtonHab21" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab22" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab23" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab24" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab25" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButtonHab26" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab27" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab28" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab29" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonHab30" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="73" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JButton" name="jButtonHab16">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="016"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonHab16ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab17">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="017"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab18">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="018"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab19">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="19"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab20">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="020"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab21">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="021"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab22">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="022"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab23">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="023"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab24">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="24"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab25">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="025"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab26">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="026"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab27">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="027"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab28">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="028"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab29">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="029"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonHab30">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="030"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
