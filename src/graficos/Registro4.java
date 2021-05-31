@@ -6,6 +6,7 @@
 package graficos;
 
 import controlMySQL.MySqlConn;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -80,32 +81,102 @@ public class Registro4 extends javax.swing.JPanel {
         });
 
         jButtonHab2.setText("002");
+        jButtonHab2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab2ActionPerformed(evt);
+            }
+        });
 
         jButtonHab3.setText("003");
+        jButtonHab3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab3ActionPerformed(evt);
+            }
+        });
 
         jButtonHab4.setText("004");
+        jButtonHab4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab4ActionPerformed(evt);
+            }
+        });
 
         jButtonHab5.setText("005");
+        jButtonHab5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab5ActionPerformed(evt);
+            }
+        });
 
         jButtonHab10.setText("010");
+        jButtonHab10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab10ActionPerformed(evt);
+            }
+        });
 
         jButtonHab9.setText("009");
+        jButtonHab9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab9ActionPerformed(evt);
+            }
+        });
 
         jButtonHab8.setText("008");
+        jButtonHab8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab8ActionPerformed(evt);
+            }
+        });
 
         jButtonHab7.setText("007");
+        jButtonHab7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab7ActionPerformed(evt);
+            }
+        });
 
         jButtonHab6.setText("006");
+        jButtonHab6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab6ActionPerformed(evt);
+            }
+        });
 
         jButtonHab11.setText("011");
+        jButtonHab11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab11ActionPerformed(evt);
+            }
+        });
 
         jButtonHab12.setText("012");
+        jButtonHab12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab12ActionPerformed(evt);
+            }
+        });
 
         jButtonHab13.setText("013");
+        jButtonHab13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab13ActionPerformed(evt);
+            }
+        });
 
         jButtonHab14.setText("014");
+        jButtonHab14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab14ActionPerformed(evt);
+            }
+        });
 
         jButtonHab15.setText("015");
+        jButtonHab15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab15ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -185,32 +256,102 @@ public class Registro4 extends javax.swing.JPanel {
         });
 
         jButtonHab17.setText("017");
+        jButtonHab17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab17ActionPerformed(evt);
+            }
+        });
 
         jButtonHab18.setText("018");
+        jButtonHab18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab18ActionPerformed(evt);
+            }
+        });
 
         jButtonHab19.setText("19");
+        jButtonHab19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab19ActionPerformed(evt);
+            }
+        });
 
         jButtonHab20.setText("020");
+        jButtonHab20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab20ActionPerformed(evt);
+            }
+        });
 
         jButtonHab21.setText("021");
+        jButtonHab21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab21ActionPerformed(evt);
+            }
+        });
 
         jButtonHab22.setText("022");
+        jButtonHab22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab22ActionPerformed(evt);
+            }
+        });
 
         jButtonHab23.setText("023");
+        jButtonHab23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab23ActionPerformed(evt);
+            }
+        });
 
         jButtonHab24.setText("24");
+        jButtonHab24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab24ActionPerformed(evt);
+            }
+        });
 
         jButtonHab25.setText("025");
+        jButtonHab25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab25ActionPerformed(evt);
+            }
+        });
 
         jButtonHab26.setText("026");
+        jButtonHab26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab26ActionPerformed(evt);
+            }
+        });
 
         jButtonHab27.setText("027");
+        jButtonHab27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab27ActionPerformed(evt);
+            }
+        });
 
         jButtonHab28.setText("028");
+        jButtonHab28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab28ActionPerformed(evt);
+            }
+        });
 
         jButtonHab29.setText("029");
+        jButtonHab29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab29ActionPerformed(evt);
+            }
+        });
 
         jButtonHab30.setText("030");
+        jButtonHab30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHab30ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -286,7 +427,7 @@ public class Registro4 extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,14 +437,217 @@ public class Registro4 extends javax.swing.JPanel {
 
     private void jButtonHab16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab16ActionPerformed
         // TODO add your handling code here:
+        Habitaciones(16, "16");
     }//GEN-LAST:event_jButtonHab16ActionPerformed
 
     private void jButtonHab1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab1ActionPerformed
         // TODO add your handling code here:
-        registro2 x = new registro2(conn, "1");
-        x.setVisible(true);
+        Habitaciones(1, "1");
     }//GEN-LAST:event_jButtonHab1ActionPerformed
 
+    private void jButtonHab2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab2ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(2, "2");
+    }//GEN-LAST:event_jButtonHab2ActionPerformed
+
+    private void jButtonHab3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab3ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(3, "3");
+    }//GEN-LAST:event_jButtonHab3ActionPerformed
+
+    private void jButtonHab4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab4ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(4, "4");
+    }//GEN-LAST:event_jButtonHab4ActionPerformed
+
+    private void jButtonHab5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab5ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(5, "5");
+    }//GEN-LAST:event_jButtonHab5ActionPerformed
+
+    private void jButtonHab6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab6ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(6, "6");
+    }//GEN-LAST:event_jButtonHab6ActionPerformed
+
+    private void jButtonHab7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab7ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(7, "7");
+    }//GEN-LAST:event_jButtonHab7ActionPerformed
+
+    private void jButtonHab8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab8ActionPerformed
+        // TODO add your handling code here:Habitaciones(2, "2");
+        Habitaciones(8, "8");
+    }//GEN-LAST:event_jButtonHab8ActionPerformed
+
+    private void jButtonHab9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab9ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(9, "9");
+    }//GEN-LAST:event_jButtonHab9ActionPerformed
+
+    private void jButtonHab10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab10ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(10, "10");
+    }//GEN-LAST:event_jButtonHab10ActionPerformed
+
+    private void jButtonHab11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab11ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(11, "11");
+    }//GEN-LAST:event_jButtonHab11ActionPerformed
+
+    private void jButtonHab12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab12ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(12, "12");
+    }//GEN-LAST:event_jButtonHab12ActionPerformed
+
+    private void jButtonHab13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab13ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(13, "13");
+    }//GEN-LAST:event_jButtonHab13ActionPerformed
+
+    private void jButtonHab14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab14ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(14, "14");
+    }//GEN-LAST:event_jButtonHab14ActionPerformed
+
+    private void jButtonHab15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab15ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(15, "15");
+    }//GEN-LAST:event_jButtonHab15ActionPerformed
+
+    private void jButtonHab17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab17ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(17, "17");
+    }//GEN-LAST:event_jButtonHab17ActionPerformed
+
+    private void jButtonHab18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab18ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(18, "18");
+    }//GEN-LAST:event_jButtonHab18ActionPerformed
+
+    private void jButtonHab19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab19ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(19, "19");
+    }//GEN-LAST:event_jButtonHab19ActionPerformed
+
+    private void jButtonHab20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab20ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(20, "20");
+    }//GEN-LAST:event_jButtonHab20ActionPerformed
+
+    private void jButtonHab21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab21ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(21, "21");
+    }//GEN-LAST:event_jButtonHab21ActionPerformed
+
+    private void jButtonHab22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab22ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(22, "22");
+    }//GEN-LAST:event_jButtonHab22ActionPerformed
+
+    private void jButtonHab23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab23ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(23, "23");
+    }//GEN-LAST:event_jButtonHab23ActionPerformed
+
+    private void jButtonHab24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab24ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(24, "24");
+    }//GEN-LAST:event_jButtonHab24ActionPerformed
+
+    private void jButtonHab25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab25ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(25, "25");
+    }//GEN-LAST:event_jButtonHab25ActionPerformed
+
+    private void jButtonHab26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab26ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(26, "26");
+    }//GEN-LAST:event_jButtonHab26ActionPerformed
+
+    private void jButtonHab27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab27ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(27, "27");
+    }//GEN-LAST:event_jButtonHab27ActionPerformed
+
+    private void jButtonHab28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab28ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(28, "28");
+    }//GEN-LAST:event_jButtonHab28ActionPerformed
+
+    private void jButtonHab29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab29ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(29, "29");
+    }//GEN-LAST:event_jButtonHab29ActionPerformed
+
+    private void jButtonHab30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHab30ActionPerformed
+        // TODO add your handling code here:
+        Habitaciones(30, "30");
+    }//GEN-LAST:event_jButtonHab30ActionPerformed
+
+    
+    private void Habitaciones(int numH, String nummH)
+    {
+        if(consultar(numH) == true)
+        {
+            registro2 x = new registro2(conn, nummH);
+            x.setLocationRelativeTo(null);
+            x.setVisible(true);
+            
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, "Habitacion ocupada");
+            //JOptionPane.showInternalMessageDialog(this, "Habitacion ocupada");
+        }
+    }
+    
+    private boolean consultar(int numH)
+    {
+        String query = "SELECT * FROM habitaciones where num_habitacion = " + "'" + 
+                numH + "'";
+        this.conn.Consult(query);
+        int n = 0;
+        try
+        {
+           this.conn.rs.last();
+           n = this.conn.rs.getRow();
+           this.conn.rs.first();
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Error # 1.....");
+        }
+        if(n != 0)
+        {
+            int aux = 0;
+            System.out.println("n" + n);
+            
+            for (int i = 0; i < n; i++) 
+            {
+                
+                try
+                {
+                   
+                    aux = this.conn.rs.getInt(8);
+                    this.conn.rs.next();
+                }
+                catch(Exception ex)
+                {
+                   
+                }
+            }
+            
+            if(aux == 1)
+            {
+               
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonHab1;
