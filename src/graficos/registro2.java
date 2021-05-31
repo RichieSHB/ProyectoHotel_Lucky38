@@ -78,7 +78,7 @@ public class registro2 extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabelNombre.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabelNombre.setText("NOMBRE DEL HUESPED");
@@ -165,8 +165,8 @@ public class registro2 extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 384, Short.MAX_VALUE)
                         .addComponent(jLabelTitulo)
                         .addGap(26, 26, 26))
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -215,24 +215,19 @@ public class registro2 extends javax.swing.JFrame {
                                     .addComponent(jDateChooserFechaSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jTextFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                                     .addComponent(jTextFieldCiudad))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 116, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 464, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jButtonMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(305, 305, 305))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabelTitulo)
                         .addGap(30, 30, 30)
@@ -270,7 +265,12 @@ public class registro2 extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(55, 55, 55))))
+                        .addGap(55, 55, 55))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jTextFieldHabitacionNumero.setText(numH);
@@ -310,9 +310,9 @@ public class registro2 extends javax.swing.JFrame {
             .addGap(0, 525, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 1, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 1, Short.MAX_VALUE)))
         );
 
         pack();
@@ -341,26 +341,34 @@ public class registro2 extends javax.swing.JFrame {
         //                limhuesped = this.jTextFieldLimiteHuesped.getText();
         //                numpiso = (int) this.jSpinnerNumeroPiso.getValue();
         //                numhuesped = (int) this.jSpinnerNumeroPiso.getValue();
-        String nombre, ciudad, tipoHabitacion;
+        
         int numHabitacion, numPersonas, numPiso;
 
-        if(this.jTextFieldNombre.getText().isEmpty() || this.jTextFieldCiudad.getText().isEmpty() || this.jTextFieldHabitacionNumero.getText().isEmpty())
+        if(this.jTextFieldNombre.getText().isEmpty() || this.jTextFieldCiudad.getText().isEmpty() || this.jTextFieldHabitacionNumero.getText().isEmpty()
+                || this.jDateChooserFechaLlegada.getDate() == null || this.jDateChooserFechaSalida.getDate() == null)
         {
             JOptionPane.showMessageDialog(this, "Porfavor rellene los campos vacios");
         }
         else
         {
+            String nombre, ciudad, tipoHabitacion;
+            int numHabi = Integer.parseInt(numH);
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             //SimpleDateFormat formato2 = new SimpleDateFormat("yyyy-MM-dd");
             //instanseo de variables
             nombre = this.jTextFieldNombre.getText().trim();
             ciudad = this.jTextFieldCiudad.getText().trim();
            // tipoHabitacion = (String) this.jComboBoxHabitacionTipo.getSelectedItem();//getSelectedIndex();
-            numHabitacion = Integer.parseInt(this.jTextFieldHabitacionNumero.getText());
+//            numHabitacion = Integer.parseInt(this.jTextFieldHabitacionNumero.getText());
             //            numPiso = (int) this.jSpinnerNumeroPiso.getValue();
 
             try
             {
+                //UPDATE `habitaciones` SET `num_habitacion`='[value-1]',`nombre`='[value-2]',`ciudad`='[value-3]',`fecha_llegada`='[value-4]',`fecha_salida`='[value-5]',`tipo_habitacion`='[value-6]',`num_piso`='[value-7]',`Ocupado`='[value-8]' WHERE 1
+                String query = "UPDATE habitaciones SET num_habitacion =" + "'" + numHabi + "', nombre = " + "'" + nombre + "', ciudad =" + "'" + ciudad
+                        + "'" + ", fecha_llegada = " + "'" + formato.format(this.jDateChooserFechaLlegada.getDate()) + "'" + ", fecha_salida = " + "'" + formato.format(this.jDateChooserFechaSalida.getDate()) + "'"
+                       + ", tipo_habitacion = " + "'" + this.jTextField2.getText().trim() + "'" + ", num_piso = " + "'" + this.jTextField1.getText().trim() + "'" + ", Ocupado = 1 WHERE num_habitacion = " + "'" + numHabi + "'";
+                this.conn.Update(query);
                 //                String query = "INSERT INTO registro(num_habitacion, nombre, ciudad, fecha_llegada, fecha_salida, tipo_habitacion, num_personas, num_piso) VALUES ("
                 //                        + "'" + numHabitacion + "','" + nombre + "','" + ciudad + "','" + formato.format(this.jDateChooserFechaLlegada.getDate())
                 //                        + "','" + formato.format(this.jDateChooserFechaSalida.getDate()) + "','" + tipoHabitacion + "','" + numPersonas + "','" + numPiso + "')";

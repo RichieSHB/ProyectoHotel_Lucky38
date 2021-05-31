@@ -593,7 +593,7 @@ public class Registro4 extends javax.swing.JPanel {
             registro2 x = new registro2(conn, nummH);
             x.setLocationRelativeTo(null);
             x.setVisible(true);
-            
+          
         }
         else
         {
