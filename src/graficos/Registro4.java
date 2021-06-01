@@ -621,7 +621,7 @@ public class Registro4 extends javax.swing.JPanel {
         if(n != 0)
         {
             int aux = 0;
-            System.out.println("n" + n);
+            //System.out.println("n" + n);
             
             for (int i = 0; i < n; i++) 
             {
