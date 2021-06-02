@@ -14,6 +14,7 @@ import clases.Huesped;
 import clases.Recibo;
 import controlMySQL.MySqlConn;
 import java.text.SimpleDateFormat;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 public class registro2 extends javax.swing.JFrame {
 
@@ -24,6 +25,7 @@ public class registro2 extends javax.swing.JFrame {
     String numH;
     public registro2(MySqlConn conn, String numH)
     {
+        this.setIconImage(new ImageIcon(getClass().getResource("/imagenes/IconoLucky38.png")).getImage()); 
         this.conn = conn;
         this.numH = numH;
         initComponents();
