@@ -10,6 +10,8 @@ package graficos;
  * @author rajop
  */
 
+import clases.Huesped;
+import clases.Recibo;
 import controlMySQL.MySqlConn;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
@@ -301,7 +303,8 @@ public class registro2 extends javax.swing.JFrame {
         //                numhuesped = (int) this.jSpinnerNumeroPiso.getValue();
         
         int numHabitacion, numPersonas, numPiso;
-
+        Huesped ingreso;
+        Recibo ticket;
         if(this.jTextFieldNombre.getText().isEmpty() || this.jTextFieldCiudad.getText().isEmpty() || this.jTextFieldHabitacionNumero.getText().isEmpty()
                 || this.jDateChooserFechaLlegada.getDate() == null || this.jDateChooserFechaSalida.getDate() == null)
         {
@@ -322,7 +325,9 @@ public class registro2 extends javax.swing.JFrame {
            // tipoHabitacion = (String) this.jComboBoxHabitacionTipo.getSelectedItem();//getSelectedIndex();
 //            numHabitacion = Integer.parseInt(this.jTextFieldHabitacionNumero.getText());
             //            numPiso = (int) this.jSpinnerNumeroPiso.getValue();
-
+            ingreso = new Huesped(nombre,ciudad, this.jTextField2.getText(),this.numH,extras,this.jDateChooserFechaLlegada.getDate(),this.jDateChooserFechaSalida.getDate());
+            ticket = new Recibo(ingreso);
+            ticket.llenarTicket();
             try
             {
                 //UPDATE `habitaciones` SET `num_habitacion`='[value-1]',`nombre`='[value-2]',`ciudad`='[value-3]',`fecha_llegada`='[value-4]',`fecha_salida`='[value-5]',`tipo_habitacion`='[value-6]',`num_piso`='[value-7]',`Ocupado`='[value-8]' WHERE 1
@@ -345,7 +350,8 @@ public class registro2 extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Error al subir archivos");
                     System.out.println(ex);
                 }
-
+                JOptionPane.showMessageDialog(this, ticket.getContentTicket());
+                this.dispose();
             }
 
             //numPersonas = this.jSpinnerNumeroPersona
