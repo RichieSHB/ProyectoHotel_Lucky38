@@ -90,20 +90,21 @@ public class ListaHuespedes extends javax.swing.JPanel {
        String query = "Select * From habitaciones";
        Statement st;
        ResultSet resultados;
-       String Nombre,salida,hab;
+       String Nombre,salida;
+       int hab;
        ArrayList <String> lista = new ArrayList();
-       ArrayList <String> lista1 = new ArrayList();
+       ArrayList <Integer> lista1 = new ArrayList();
        try {
             st = this.conn.conn.createStatement();
             resultados = st.executeQuery(query);
             while(resultados.next()){
                 
                 Nombre = resultados.getString("nombre");
+                hab = resultados.getInt("num_habitacion");
                 if(Nombre.equals("")){
                     
                 }else{
                     lista.add(Nombre);
-                    hab = resultados.getString("num_habitacion");
                     lista1.add(hab);
                     System.out.println(lista1);
                 }
