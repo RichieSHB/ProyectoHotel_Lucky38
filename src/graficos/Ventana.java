@@ -101,6 +101,7 @@ public class Ventana extends javax.swing.JFrame {
         registro41 = new graficos.Registro4();
         jPanelOut = new javax.swing.JPanel();
         jPanelCon = new javax.swing.JPanel();
+        consultasSubMenu1 = new graficos.ConsultasSubMenu();
         jPanelImg = new javax.swing.JPanel();
         jPanelMuestra = new javax.swing.JPanel();
         jLabelImagen = new javax.swing.JLabel();
@@ -164,11 +165,15 @@ public class Ventana extends javax.swing.JFrame {
         jPanelCon.setLayout(jPanelConLayout);
         jPanelConLayout.setHorizontalGroup(
             jPanelConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1110, Short.MAX_VALUE)
+            .addGroup(jPanelConLayout.createSequentialGroup()
+                .addComponent(consultasSubMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, 964, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 146, Short.MAX_VALUE))
         );
         jPanelConLayout.setVerticalGroup(
             jPanelConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addGroup(jPanelConLayout.createSequentialGroup()
+                .addComponent(consultasSubMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 82, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consultas", jPanelCon);
@@ -368,6 +373,7 @@ public class Ventana extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private graficos.registro basura;
+    private graficos.ConsultasSubMenu consultasSubMenu1;
     private javax.swing.JButton jButtonAgregarImg;
     private javax.swing.JButton jButtonSiguienteImg;
     private javax.swing.JLabel jLabelImagen;

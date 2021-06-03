@@ -18,4 +18,16 @@ public class Audio {
         Sound = java.applet.Applet.newAudioClip(getClass().getResource("/imagenes/LoginMarty.wav"));
         Sound.play();
     }
+
+    public void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    public void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    public void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
 }
