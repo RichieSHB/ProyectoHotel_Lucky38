@@ -5,6 +5,9 @@
  */
 package graficos;
 
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ernesto CH
@@ -28,126 +31,151 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
+        jPanelGaleria = new javax.swing.JPanel();
+        jPanelIngresos = new javax.swing.JPanel();
+        jPanelDisponibilidad = new javax.swing.JPanel();
+        jPanelCostos = new javax.swing.JPanel();
+        jPanelBuscarHuesped = new javax.swing.JPanel();
+        jPanelBuscarHabitacion = new javax.swing.JPanel();
+        jPanelPisos = new javax.swing.JPanel();
+        jPanelListaHuesped = new javax.swing.JPanel();
+        listaHuespedes1 = new consultas.ListaHuespedes();
+        jPanelFechayHora = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanelGaleriaLayout = new javax.swing.GroupLayout(jPanelGaleria);
+        jPanelGaleria.setLayout(jPanelGaleriaLayout);
+        jPanelGaleriaLayout.setHorizontalGroup(
+            jPanelGaleriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 616, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelGaleriaLayout.setVerticalGroup(
+            jPanelGaleriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 402, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Galeria", jPanel1);
+        jTabbedPane1.addTab("Galeria", jPanelGaleria);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanelIngresosLayout = new javax.swing.GroupLayout(jPanelIngresos);
+        jPanelIngresos.setLayout(jPanelIngresosLayout);
+        jPanelIngresosLayout.setHorizontalGroup(
+            jPanelIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 616, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelIngresosLayout.setVerticalGroup(
+            jPanelIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 402, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Ingresos", jPanel2);
-        jTabbedPane1.addTab("Disponibilidad", jScrollPane1);
+        jTabbedPane1.addTab("Ingresos", jPanelIngresos);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanelDisponibilidadLayout = new javax.swing.GroupLayout(jPanelDisponibilidad);
+        jPanelDisponibilidad.setLayout(jPanelDisponibilidadLayout);
+        jPanelDisponibilidadLayout.setHorizontalGroup(
+            jPanelDisponibilidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 616, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelDisponibilidadLayout.setVerticalGroup(
+            jPanelDisponibilidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 402, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Costos", jPanel3);
+        jTabbedPane1.addTab("Disponibilidad", jPanelDisponibilidad);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanelCostosLayout = new javax.swing.GroupLayout(jPanelCostos);
+        jPanelCostos.setLayout(jPanelCostosLayout);
+        jPanelCostosLayout.setHorizontalGroup(
+            jPanelCostosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 616, Short.MAX_VALUE)
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelCostosLayout.setVerticalGroup(
+            jPanelCostosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 402, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Buscar Huesped", jPanel4);
+        jTabbedPane1.addTab("Costos", jPanelCostos);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanelBuscarHuespedLayout = new javax.swing.GroupLayout(jPanelBuscarHuesped);
+        jPanelBuscarHuesped.setLayout(jPanelBuscarHuespedLayout);
+        jPanelBuscarHuespedLayout.setHorizontalGroup(
+            jPanelBuscarHuespedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 616, Short.MAX_VALUE)
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelBuscarHuespedLayout.setVerticalGroup(
+            jPanelBuscarHuespedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 402, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Buscar Habitación", jPanel5);
+        jTabbedPane1.addTab("Buscar Huesped", jPanelBuscarHuesped);
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanelBuscarHabitacionLayout = new javax.swing.GroupLayout(jPanelBuscarHabitacion);
+        jPanelBuscarHabitacion.setLayout(jPanelBuscarHabitacionLayout);
+        jPanelBuscarHabitacionLayout.setHorizontalGroup(
+            jPanelBuscarHabitacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 616, Short.MAX_VALUE)
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelBuscarHabitacionLayout.setVerticalGroup(
+            jPanelBuscarHabitacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 402, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Pisos", jPanel6);
+        jTabbedPane1.addTab("Buscar Habitación", jPanelBuscarHabitacion);
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanelPisosLayout = new javax.swing.GroupLayout(jPanelPisos);
+        jPanelPisos.setLayout(jPanelPisosLayout);
+        jPanelPisosLayout.setHorizontalGroup(
+            jPanelPisosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 616, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelPisosLayout.setVerticalGroup(
+            jPanelPisosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 402, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Lista de Huespedes", jPanel7);
+        jTabbedPane1.addTab("Pisos", jPanelPisos);
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 666, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanelListaHuespedLayout = new javax.swing.GroupLayout(jPanelListaHuesped);
+        jPanelListaHuesped.setLayout(jPanelListaHuespedLayout);
+        jPanelListaHuespedLayout.setHorizontalGroup(
+            jPanelListaHuespedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelListaHuespedLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(listaHuespedes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelListaHuespedLayout.setVerticalGroup(
+            jPanelListaHuespedLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelListaHuespedLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(listaHuespedes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Lista de Huespedes", jPanelListaHuesped);
+
+        jPanelFechayHora.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanelFechayHoraMouseEntered(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelFechayHoraLayout = new javax.swing.GroupLayout(jPanelFechayHora);
+        jPanelFechayHora.setLayout(jPanelFechayHoraLayout);
+        jPanelFechayHoraLayout.setHorizontalGroup(
+            jPanelFechayHoraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 616, Short.MAX_VALUE)
+        );
+        jPanelFechayHoraLayout.setVerticalGroup(
+            jPanelFechayHoraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 402, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Fecha y Hora", jPanel8);
+        jTabbedPane1.addTab("Fecha y Hora", jPanelFechayHora);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,17 +183,31 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jPanelFechayHoraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelFechayHoraMouseEntered
+        int op = JOptionPane.showConfirmDialog(this.jPanelFechayHora,"Desea consultar la fecha y hora del sistema?....");
+        if(op == 0){
+            java.util.Date fecha = new Date();
+            String dia = String.valueOf(fecha);
+            JOptionPane.showMessageDialog(jPanelFechayHora,dia,"Fecha y Hora Actual del Sistema",1);
+        }else if(op == 1){
+            System.out.println("Selecciono no");
+        }else{
+            System.out.println("Secelcciono cancelar");
+        }
+    }//GEN-LAST:event_jPanelFechayHoraMouseEntered
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanelBuscarHabitacion;
+    private javax.swing.JPanel jPanelBuscarHuesped;
+    private javax.swing.JPanel jPanelCostos;
+    private javax.swing.JPanel jPanelDisponibilidad;
+    private javax.swing.JPanel jPanelFechayHora;
+    private javax.swing.JPanel jPanelGaleria;
+    private javax.swing.JPanel jPanelIngresos;
+    private javax.swing.JPanel jPanelListaHuesped;
+    private javax.swing.JPanel jPanelPisos;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private consultas.ListaHuespedes listaHuespedes1;
     // End of variables declaration//GEN-END:variables
 }
