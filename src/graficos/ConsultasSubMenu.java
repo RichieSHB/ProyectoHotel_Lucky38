@@ -38,6 +38,7 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
         jPanelBuscarHuesped = new javax.swing.JPanel();
         jPanelBuscarHabitacion = new javax.swing.JPanel();
         jPanelPisos = new javax.swing.JPanel();
+        disponibilidadPisos1 = new consultas.DisponibilidadPisos();
         jPanelListaHuesped = new javax.swing.JPanel();
         listaHuespedes1 = new consultas.ListaHuespedes();
         jPanelFechayHora = new javax.swing.JPanel();
@@ -50,7 +51,7 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
         );
         jPanelGaleriaLayout.setVerticalGroup(
             jPanelGaleriaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 402, Short.MAX_VALUE)
+            .addGap(0, 526, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Galeria", jPanelGaleria);
@@ -124,11 +125,17 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
         jPanelPisos.setLayout(jPanelPisosLayout);
         jPanelPisosLayout.setHorizontalGroup(
             jPanelPisosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 616, Short.MAX_VALUE)
+            .addGroup(jPanelPisosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(disponibilidadPisos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelPisosLayout.setVerticalGroup(
             jPanelPisosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 402, Short.MAX_VALUE)
+            .addGroup(jPanelPisosLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(disponibilidadPisos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Pisos", jPanelPisos);
@@ -190,7 +197,6 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
             String dia = String.valueOf(fecha);
             JOptionPane.showMessageDialog(jPanelFechayHora,dia,"Fecha y Hora Actual del Sistema",1);
             System.out.println("Selecciono si");
-            System.out.println("Si ven esto ya chingue");
         }else if(op == 1){
             System.out.println("Selecciono no");
         }else{
@@ -200,6 +206,7 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private consultas.DisponibilidadPisos disponibilidadPisos1;
     private javax.swing.JPanel jPanelBuscarHabitacion;
     private javax.swing.JPanel jPanelBuscarHuesped;
     private javax.swing.JPanel jPanelCostos;
