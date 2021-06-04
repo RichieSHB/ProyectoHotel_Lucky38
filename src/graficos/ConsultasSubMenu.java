@@ -189,6 +189,8 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
             java.util.Date fecha = new Date();
             String dia = String.valueOf(fecha);
             JOptionPane.showMessageDialog(jPanelFechayHora,dia,"Fecha y Hora Actual del Sistema",1);
+            System.out.println("Selecciono si");
+            System.out.println("Si ven esto ya chingue");
         }else if(op == 1){
             System.out.println("Selecciono no");
         }else{
