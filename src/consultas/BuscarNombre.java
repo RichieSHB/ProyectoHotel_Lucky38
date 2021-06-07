@@ -152,6 +152,8 @@ public class BuscarNombre extends javax.swing.JPanel {
                 this.jTextFieldPiso.setText("");
             }
             if(buscar.equals("")){
+                this.jTextFieldHabitacion.setText("");
+                this.jTextFieldPiso.setText("");
                 JOptionPane.showMessageDialog(this.jTextFieldNombre,"Llenar casilla vacia");
             }
         } catch (SQLException ex) {
