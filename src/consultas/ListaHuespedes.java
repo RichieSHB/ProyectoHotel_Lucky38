@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -42,6 +43,7 @@ public class ListaHuespedes extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButtonMostrar = new javax.swing.JButton();
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
@@ -87,11 +89,12 @@ public class ListaHuespedes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarActionPerformed
-       String query = "Select * From habitaciones";
+       this.jTextArea1.setText("");
+        String query = "Select * From habitaciones";
        Statement st;
        ResultSet resultados;
        String Nombre,salida;
-       int hab;
+       int hab,objeto4,j=0,objeto5=0;
        ArrayList <String> lista = new ArrayList();
        ArrayList <Integer> lista1 = new ArrayList();
        try {
@@ -106,10 +109,13 @@ public class ListaHuespedes extends javax.swing.JPanel {
                 }else{
                     lista.add(Nombre);
                     lista1.add(hab);
-                    System.out.println(lista1);
+                    System.out.println(lista);
                 }
+                //objeto4 = lista1.get(j);
+                //lista1.set(1, objeto4);
                 Collections.sort(lista);
-            }
+            };
+            System.out.println(lista);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error en la base de datos");
         }
