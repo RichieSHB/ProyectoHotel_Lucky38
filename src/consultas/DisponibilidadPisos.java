@@ -45,6 +45,7 @@ public class DisponibilidadPisos extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
         jLabel1.setText("Consultar Disponibilidad Piso 1 o Piso 2");
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
@@ -100,7 +101,7 @@ public class DisponibilidadPisos extends javax.swing.JPanel {
 
     private void jButtonPiso1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPiso1ActionPerformed
        this.jTextArea1.setText("");
-       this.jTextArea1.append("En el piso 1 estan diposnibles las habitaciones: \n");
+       this.jTextArea1.append("En el piso 1 estan disponibles las habitaciones: \n\n");
        String query = "Select * From habitaciones";
        Statement st;
        ResultSet resultados;
@@ -129,7 +130,7 @@ public class DisponibilidadPisos extends javax.swing.JPanel {
 
     private void jButtonPiso2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPiso2ActionPerformed
         this.jTextArea1.setText("");
-        this.jTextArea1.append("En el piso 2 estan diposnibles las habitaciones: \n");
+        this.jTextArea1.append("En el piso 2 estan disponibles las habitaciones: \n\n");
         String query = "Select * From habitaciones";
        Statement st;
        ResultSet resultados = null;
