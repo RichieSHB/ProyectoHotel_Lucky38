@@ -165,15 +165,13 @@ public class Ventana extends javax.swing.JFrame {
         jPanelCon.setLayout(jPanelConLayout);
         jPanelConLayout.setHorizontalGroup(
             jPanelConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelConLayout.createSequentialGroup()
-                .addComponent(consultasSubMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, 964, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 146, Short.MAX_VALUE))
+            .addComponent(consultasSubMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, 1110, Short.MAX_VALUE)
         );
         jPanelConLayout.setVerticalGroup(
             jPanelConLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelConLayout.createSequentialGroup()
                 .addComponent(consultasSubMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 82, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Consultas", jPanelCon);
@@ -187,17 +185,11 @@ public class Ventana extends javax.swing.JFrame {
         jPanelMuestra.setLayout(jPanelMuestraLayout);
         jPanelMuestraLayout.setHorizontalGroup(
             jPanelMuestraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelMuestraLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelImagen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabelImagen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanelMuestraLayout.setVerticalGroup(
             jPanelMuestraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelMuestraLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelImagen, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabelImagen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
         );
 
         jLabelImagenesMuestra.setText("Imagenes de Muestra");
