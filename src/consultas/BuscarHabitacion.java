@@ -108,6 +108,13 @@ public class BuscarHabitacion extends javax.swing.JPanel {
                 String buscar,hab,ocupado,nombre;
                 int i;
                 buscar = this.jTextFieldHabitacion.getText();
+                if(buscar.equals("")){
+                    try{
+                        JOptionPane.showMessageDialog(this.jTextFieldHabitacion,"Llenar casilla vacia");
+                    }catch(NumberFormatException ex){
+                        
+                    }
+                }
                 String query = "Select * From habitaciones";
                 Statement st;
                 ResultSet resultados ;
@@ -142,13 +149,15 @@ public class BuscarHabitacion extends javax.swing.JPanel {
                 ResultSet resultados ;
                 st = this.conn.conn.createStatement();
                 resultados = st.executeQuery(query);
-                
-                
+                if(buscar.equals("")){
+                           JOptionPane.showMessageDialog(this.jTextFieldHabitacion, "Llenar Casilla Vacia");
+                }
                         i = Integer.parseInt(buscar);
                         resultados.absolute(i);
                         hab = resultados.getString("num_habitacion");
                         ocupado = resultados.getString("Ocupado");
                         nombre = resultados.getString("nombre");
+                        
                         if(buscar.equals(hab)){
                             this.jTextFieldHuesped.setText(nombre);
                         }
