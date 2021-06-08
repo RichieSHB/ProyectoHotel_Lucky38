@@ -34,10 +34,11 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
         jPanelGaleria = new javax.swing.JPanel();
         jPanelIngresos = new javax.swing.JPanel();
         jPanelGrafica = new javax.swing.JPanel();
+        grafica1 = new consultas.Grafica();
         jPanelTipoHabitacion = new javax.swing.JPanel();
+        totalHabitaciones1 = new consultas.TotalHabitaciones();
         jPanelDisponibilidad = new javax.swing.JPanel();
-        consultaGrafica1 = new consultas.ConsultaGrafica();
-        consultaGrafica2 = new consultas.ConsultaGrafica();
+        consultaGrafica3 = new consultas.ConsultaGrafica();
         jPanelCostos = new javax.swing.JPanel();
         jPanelBuscarHuesped = new javax.swing.JPanel();
         buscarNombre1 = new consultas.BuscarNombre();
@@ -79,61 +80,54 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
         jPanelGrafica.setLayout(jPanelGraficaLayout);
         jPanelGraficaLayout.setHorizontalGroup(
             jPanelGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1208, Short.MAX_VALUE)
+            .addGroup(jPanelGraficaLayout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(grafica1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(528, Short.MAX_VALUE))
         );
         jPanelGraficaLayout.setVerticalGroup(
             jPanelGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
+            .addGroup(jPanelGraficaLayout.createSequentialGroup()
+                .addComponent(grafica1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 146, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Grafica", jPanelGrafica);
+        jTabbedPane1.addTab("Grafica Ocupacion ", jPanelGrafica);
 
         javax.swing.GroupLayout jPanelTipoHabitacionLayout = new javax.swing.GroupLayout(jPanelTipoHabitacion);
         jPanelTipoHabitacion.setLayout(jPanelTipoHabitacionLayout);
         jPanelTipoHabitacionLayout.setHorizontalGroup(
             jPanelTipoHabitacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1208, Short.MAX_VALUE)
+            .addGroup(jPanelTipoHabitacionLayout.createSequentialGroup()
+                .addGap(132, 132, 132)
+                .addComponent(totalHabitaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(576, Short.MAX_VALUE))
         );
         jPanelTipoHabitacionLayout.setVerticalGroup(
             jPanelTipoHabitacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
+            .addGroup(jPanelTipoHabitacionLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(totalHabitaciones1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(155, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Tipo de Habitacion", jPanelTipoHabitacion);
-
-        javax.swing.GroupLayout consultaGrafica1Layout = new javax.swing.GroupLayout(consultaGrafica1);
-        consultaGrafica1.setLayout(consultaGrafica1Layout);
-        consultaGrafica1Layout.setHorizontalGroup(
-            consultaGrafica1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        consultaGrafica1Layout.setVerticalGroup(
-            consultaGrafica1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout jPanelDisponibilidadLayout = new javax.swing.GroupLayout(jPanelDisponibilidad);
         jPanelDisponibilidad.setLayout(jPanelDisponibilidadLayout);
         jPanelDisponibilidadLayout.setHorizontalGroup(
             jPanelDisponibilidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDisponibilidadLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(consultaGrafica1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(consultaGrafica2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(583, Short.MAX_VALUE))
+                .addGap(80, 80, 80)
+                .addComponent(consultaGrafica3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(619, Short.MAX_VALUE))
         );
         jPanelDisponibilidadLayout.setVerticalGroup(
             jPanelDisponibilidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDisponibilidadLayout.createSequentialGroup()
-                .addGroup(jPanelDisponibilidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelDisponibilidadLayout.createSequentialGroup()
-                        .addGap(460, 460, 460)
-                        .addComponent(consultaGrafica1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelDisponibilidadLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(consultaGrafica2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addComponent(consultaGrafica3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Disponibilidad", jPanelDisponibilidad);
@@ -279,9 +273,9 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private consultas.BuscarHabitacion buscarHabitacion1;
     private consultas.BuscarNombre buscarNombre1;
-    private consultas.ConsultaGrafica consultaGrafica1;
-    private consultas.ConsultaGrafica consultaGrafica2;
+    private consultas.ConsultaGrafica consultaGrafica3;
     private consultas.DisponibilidadPisos disponibilidadPisos1;
+    private consultas.Grafica grafica1;
     private javax.swing.JPanel jPanelBuscarHabitacion;
     private javax.swing.JPanel jPanelBuscarHuesped;
     private javax.swing.JPanel jPanelCostos;
@@ -295,5 +289,6 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
     private javax.swing.JPanel jPanelTipoHabitacion;
     private javax.swing.JTabbedPane jTabbedPane1;
     private consultas.ListaHuespedes listaHuespedes1;
+    private consultas.TotalHabitaciones totalHabitaciones1;
     // End of variables declaration//GEN-END:variables
 }
