@@ -83,10 +83,12 @@ public class ConsultaGrafica extends javax.swing.JPanel {
     private javax.swing.JButton jButtonGrafica;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+    @Override
     public void paint(Graphics g){
         super.paint(g);
         if(band == true){
-            int nodisponible = 0,disponible=0,total;
+            int nodisponible = 0,disponible=0;
+            float total;
             String ocupado;
             String di,nd;
             try {
@@ -105,23 +107,29 @@ public class ConsultaGrafica extends javax.swing.JPanel {
                 }
                 total = disponible+nodisponible;
                 
-                int d = disponible*100/total;
-                int n = nodisponible*100/total;
+                float d = disponible*100/total;
+                float n = nodisponible*100/total;
                 
-                di = String.valueOf(d);
-                nd = String.valueOf(n);
+                int dis = Math.round(d);
+                int ndis =Math.round(n);
+                float gradodisponible = disponible*360/total;
+                float gradonodisponible = nodisponible*360/total;
                 
-                int gradodisponible = disponible*360/total;
-                int gradonodisponible = nodisponible*360/total;
+                int disp,nodisp;
+                disp = Math.round(gradodisponible);
+                nodisp = Math.round(gradonodisponible);
+                
+                di = String.valueOf(dis);
+                nd = String.valueOf(ndis);
                 
                 g.setColor(Color.red);
-                g.fillArc(25,80,200,200,0,gradodisponible);
+                g.fillArc(25,80,200,200,0,disp);
                 g.fillRect(250, 120,20,20);
                 g.drawString("Disponible",275,135);
                 g.drawString(di + " %",360,135);
                 
                 g.setColor(Color.DARK_GRAY);
-                g.fillArc(25,80,200,200,gradodisponible,gradonodisponible);
+                g.fillArc(25,80,200,200,disp,nodisp);
                 g.fillRect(250,150,20,20);
                 g.drawString("No Disponible",275,165);
                 g.drawString(nd + " %", 360, 165);
