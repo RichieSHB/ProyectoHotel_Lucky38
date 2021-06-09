@@ -6,15 +6,24 @@
 package graficos;
 import clases.Huesped;
 import clases.Recibo;
+import com.mysql.jdbc.Statement;
 import controlMySQL.MySqlConn;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 /**
  *
  * @author Ernesto CH
  */
 public class bajas extends javax.swing.JPanel {
+    PreparedStatement ps; 
+    ResultSet rs;
+     
 
     /**
      * Creates new form bajas
@@ -23,11 +32,47 @@ MySqlConn conn = new MySqlConn();
     public bajas(MySqlConn conn) {
         
         this.conn = conn;
+        
         initComponents();
     }
        public bajas() {
         initComponents();
     }
+public void limpiar(){
+    
+    jTextFieldHabitacionBaja.setText(null);
+    jTextFieldNombreHuesped.setText(null);
+ 
+    
+    jCheckBoxServicioCuarto.setSelected(false);
+    jCheckBoxServicioBar.setSelected(false);
+    jCheckBoxServicioTintoreria.setSelected(false);
+    jCheckBoxServicioSpa.setSelected(false);        
+    jCheckBoxServicioNiñera.setSelected(false);
+
+    
+}
+    /*public Connection getConnection(){
+        
+              Connection conexion= null; 
+        
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+          
+            conexion = (Connection)DriverManager.getConnection(URL, usuario, contraseña);
+            JOptionPane.showMessageDialog(null, "Conexion exitosa");
+        }catch(Exception ex){
+            System.err.println("Error," +ex);
+            
+        }
+        return conexion; 
+            
+            
+        }
+        
+        
+    */
+
 
          private void Habitaciones(int numH, String nummH)
     {
@@ -107,11 +152,9 @@ MySqlConn conn = new MySqlConn();
         jButtonReciboBaja = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldNombreHuesped = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jCheckBoxServicioCuarto = new javax.swing.JCheckBox();
@@ -119,6 +162,14 @@ MySqlConn conn = new MySqlConn();
         jCheckBoxServicioTintoreria = new javax.swing.JCheckBox();
         jCheckBoxServicioSpa = new javax.swing.JCheckBox();
         jCheckBoxServicioNiñera = new javax.swing.JCheckBox();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jButtonLimpiar = new javax.swing.JButton();
+        jButtonBuscar = new javax.swing.JButton();
+        jLabeltipoHabitacion = new javax.swing.JLabel();
+        jTextFieldtipoHabitacion = new javax.swing.JTextField();
+        jDateChooserFechallegada = new com.toedter.calendar.JDateChooser();
 
         jLabelTituloBaja.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
         jLabelTituloBaja.setText("Menu Bajas");
@@ -161,9 +212,6 @@ MySqlConn conn = new MySqlConn();
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
-        jLabel3.setText("Numero de Huespedes:");
-
         jLabel4.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel4.setText("Servicio al Cuarto:");
 
@@ -179,72 +227,138 @@ MySqlConn conn = new MySqlConn();
         jLabel8.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
         jLabel8.setText("Servicio de niñera:");
 
+        jCheckBoxServicioTintoreria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxServicioTintoreriaActionPerformed(evt);
+            }
+        });
+
         jCheckBoxServicioNiñera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBoxServicioNiñeraActionPerformed(evt);
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        jLabel9.setText("Fecha de llegada: ");
+
+        jLabel10.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        jLabel10.setText("Fecha de salida:");
+
+        jLabel11.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        jLabel11.setText("jLabel11");
+
+        jButtonLimpiar.setText("Limpiar");
+        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLimpiarActionPerformed(evt);
+            }
+        });
+
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
+
+        jLabeltipoHabitacion.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        jLabeltipoHabitacion.setText("Tipo de Habitacion:");
+
+        jTextFieldtipoHabitacion.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jButtonBaja))
+                    .addComponent(jLabeltipoHabitacion))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(262, 262, 262)
-                        .addComponent(jLabelTituloBaja))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jButtonBaja)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldHabitacionBaja, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                             .addComponent(jTextFieldNombreHuesped)
-                            .addComponent(jButtonReciboBaja)
-                            .addComponent(jTextField1)
-                            .addComponent(jCheckBoxServicioCuarto)
-                            .addComponent(jCheckBoxServicioBar)
                             .addComponent(jCheckBoxServicioTintoreria)
                             .addComponent(jCheckBoxServicioSpa)
-                            .addComponent(jCheckBoxServicioNiñera))))
-                .addContainerGap(288, Short.MAX_VALUE))
+                            .addComponent(jCheckBoxServicioNiñera)
+                            .addComponent(jTextFieldtipoHabitacion))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jDateChooserFechallegada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(118, 118, 118))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel10)
+                                            .addComponent(jLabel5))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jCheckBoxServicioBar))
+                                    .addComponent(jLabel11))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonLimpiar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonReciboBaja)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addComponent(jButtonBuscar)
+                        .addGap(117, 117, 117))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBoxServicioCuarto)
+                        .addGap(0, 449, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(262, 262, 262)
+                .addComponent(jLabelTituloBaja)
+                .addGap(93, 93, 93))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonBaja, jButtonBuscar, jButtonLimpiar});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabelTituloBaja)
                 .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextFieldHabitacionBaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jTextFieldHabitacionBaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9))
+                    .addComponent(jDateChooserFechallegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jTextFieldNombreHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBoxServicioCuarto))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldNombreHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabeltipoHabitacion)
+                    .addComponent(jTextFieldtipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBoxServicioCuarto)
                     .addComponent(jCheckBoxServicioBar))
-                .addGap(18, 18, 18)
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jCheckBoxServicioTintoreria))
@@ -256,20 +370,33 @@ MySqlConn conn = new MySqlConn();
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jCheckBoxServicioNiñera))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonBaja)
-                    .addComponent(jButtonReciboBaja))
+                    .addComponent(jButtonReciboBaja)
+                    .addComponent(jButtonLimpiar)
+                    .addComponent(jButtonBuscar))
                 .addGap(44, 44, 44))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonBaja, jButtonBuscar, jButtonLimpiar});
+
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonReciboBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReciboBajaActionPerformed
         // TODO add your handling code here:
+        int servicio = 0;
+        if(this.jCheckBoxServicioCuarto.isSelected()) servicio = 1;
+        if(this.jCheckBoxServicioTintoreria.isSelected()) servicio = 1;
+        if(this.jCheckBoxServicioSpa.isSelected()) servicio = 1;
+        if(this.jCheckBoxServicioNiñera.isSelected()) servicio = 1;
+        if(this.jCheckBoxServicioBar.isSelected()) servicio = 1;
+  
+      String query = "UPDATE habitaciones SET num_habitacion =" +    ", Extras = " + "'" + servicio ;
     }//GEN-LAST:event_jButtonReciboBajaActionPerformed
 
     private void jTextFieldHabitacionBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHabitacionBajaActionPerformed
-   
+        
     }//GEN-LAST:event_jTextFieldHabitacionBajaActionPerformed
 
     private void jButtonBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBajaActionPerformed
@@ -293,10 +420,12 @@ where
              try {
                  this.conn.Update(query);
                      JOptionPane.showMessageDialog(this, "Informacion subida");//(true, "Informacion subida");
+                     limpiar();
                 }catch(Exception ex)
                 {
                     JOptionPane.showMessageDialog(this, "Error al subir archivos");
                     System.out.println(ex);
+                    limpiar();
                 }
 
         }
@@ -330,28 +459,117 @@ where
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxServicioNiñeraActionPerformed
 
+    private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
+    limpiar();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonLimpiarActionPerformed
+
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        // TODO add your handling code here:
+      
+        ResultSet resultados = null;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        Statement estado = null;
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        String nombre, fecha_llegada, fecha_salida, tipo_habitacion, salida;
+       
+       nombre=this.jTextFieldHabitacionBaja.getText().trim();
+       tipo_habitacion = this.jTextFieldtipoHabitacion.getText().trim();
+      
+       
+    
+      
+        String query = "SELECT * FROM habitaciones where num_habitacion =  " + "'" + nombre+ "'" + "'"+tipo_habitacion + "'"    ;
+        
+        try {
+            estado = (Statement) this.conn.conn.createStatement();
+            resultados = estado.executeQuery(query);
+            while(resultados.next()){
+                
+                
+                
+                nombre = resultados.getString("nombre");
+                this.jTextFieldNombreHuesped.setText(nombre); 
+                tipo_habitacion = resultados.getString("tipo_habitacion");
+                this.jTextFieldtipoHabitacion.setText(tipo_habitacion);
+                
+                
+              
+               /* fecha_llegada = resultados.getString("fecha_llegada");*/
+              /*  jDateChooserFechallegada.setDate(rs.getDate(fecha_llegada));*/
+               
+                
+            }
+            
+            
+
+         /*   }
+        try{
+            this.conn.conn.prepareStatement()
+            conexion = getConnection(); 
+            ps = conexion.prepareStatement("select * from habitaciones where num_habitacion=?");
+            ps.setString(1,jTextFieldHabitacionBaja.getText());
+            rs = ps.executeQuery(); 
+            
+            if (rs.next()){
+                
+                jTextFieldNombreHuesped.setText(rs.getString("nombre")); 
+                jTextFieldtipoHabitacion.setText(rs.getString("tipo_habitacion"));
+                jTextFieldFechallegada.setText(String.valueOf(rs.getDate("fecha_llegada")));
+                jTextFieldFechasalida.setText(String.valueOf(rs.getDate("fecha_salida")));
+                
+            }else{
+                JOptionPane.showMessageDialog(null,"No existe esa persona");
+            }
+            conexion.close();
+                
+        }catch (Exception ex){
+            System.err.println("Error, "+ex);
+        }
+        
+                }*/
+            }catch (SQLException ex){
+                JOptionPane.showMessageDialog(this, "Error en la base de datos"+ ex); 
+                
+            
+        }
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void jCheckBoxServicioTintoreriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxServicioTintoreriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxServicioTintoreriaActionPerformed
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBaja;
+    private javax.swing.JButton jButtonBuscar;
+    private javax.swing.JButton jButtonLimpiar;
     private javax.swing.JButton jButtonReciboBaja;
     private javax.swing.JCheckBox jCheckBoxServicioBar;
     private javax.swing.JCheckBox jCheckBoxServicioCuarto;
     private javax.swing.JCheckBox jCheckBoxServicioNiñera;
     private javax.swing.JCheckBox jCheckBoxServicioSpa;
     private javax.swing.JCheckBox jCheckBoxServicioTintoreria;
+    private com.toedter.calendar.JDateChooser jDateChooserFechallegada;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelTituloBaja;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabeltipoHabitacion;
     private javax.swing.JTextField jTextFieldHabitacionBaja;
     private javax.swing.JTextField jTextFieldNombreHuesped;
+    private javax.swing.JTextField jTextFieldtipoHabitacion;
     // End of variables declaration//GEN-END:variables
+
+
+
 
   
 
