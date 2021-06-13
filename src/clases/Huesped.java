@@ -13,15 +13,16 @@ import java.util.Date;
  */
 public class Huesped {
     private String nombre,ciudad,tipohab,numHab;
-    private int piso,limite = 0,totalOcupantes = 0,personasExtra;
+    private int piso,limite,totalOcupantes = 0,personasExtra;
     private Date Entrada,Salida;
 
-    public Huesped(String nombre, String ciudad, String tipohab, String numHab, int personasExtra, Date Entrada, Date Salida) {
+    public Huesped(String nombre, String ciudad, String tipohab, String numHab, int limite, int personasExtra, Date Entrada, Date Salida) {
         int numH = Integer.parseInt(numHab);
         this.nombre = nombre;
         this.ciudad = ciudad;
         this.tipohab = tipohab;
         this.numHab = numHab;
+        this.limite = limite;
         this.personasExtra = personasExtra;
         this.Entrada = Entrada;
         this.Salida = Salida;
@@ -30,18 +31,7 @@ public class Huesped {
         }else{
             this.piso = 2;
         }
-        if (this.tipohab.equals("Sencilla")) {
-            this.limite += 1;
-            this.totalOcupantes += 1;
-        }
-        if (this.tipohab.equals("Doble")) {
-            this.limite += 2;
-            this.totalOcupantes += 2;
-        }
-        if (this.tipohab.equals("Triple")) {
-            this.limite += 3;
-            this.totalOcupantes += 3;
-        }
+        this.totalOcupantes += limite;
         if (personasExtra > 0) {
             this.totalOcupantes += personasExtra;
         }
