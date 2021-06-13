@@ -44,6 +44,11 @@ public void limpiar(){
     jTextFieldHabitacionBaja.setText(null);
     jTextFieldNombreHuesped.setText(null);
     jTextFieldSaldobaja.setText(null);
+    jTextFieldtipoHabitacion.setText(null);
+    jTextFieldNumeroHuespedesbaja.setText(null);
+    jTextFieldHuespedesExtrabaja.setText(null);
+    jTextFieldFechasalidaBaja.setText(null);
+    jTextFieldFechallegadaBaja.setText(null);
     jCheckBoxServicioCuarto.setSelected(false);
     jCheckBoxServicioBar.setSelected(false);
     jCheckBoxServicioTintoreria.setSelected(false);
@@ -81,7 +86,7 @@ private void sumahuesped (int costo, int numHabi){
 
 private void upbasedatos (int aux){
     
-    System.out.println("Entro a upbasedatos datos \nValor de 'costo': "+aux);
+    System.out.println("Entro a upbasedatos datos \nIngresos totales acumulados: "+aux);
     ResultSet resultados = null;
     ResultSet rs = null;
     PreparedStatement ps = null;
@@ -365,9 +370,9 @@ private void sumafinal (int costo, int numhabi){
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(262, 262, 262)
+                .addGap(235, 235, 235)
                 .addComponent(jLabelTituloBaja)
-                .addGap(93, 93, 93))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,6 +403,8 @@ private void sumafinal (int costo, int numhabi){
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(22, 22, 22)
                                         .addComponent(jLabel11)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextFieldSaldobaja, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
@@ -414,16 +421,14 @@ private void sumafinal (int costo, int numhabi){
                                                 .addComponent(jLabel9)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jTextFieldFechallegadaBaja)))
-                                        .addGap(118, 118, 118))))
+                                        .addGap(60, 60, 60))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jButtonLimpiar)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButtonReciboBaja)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonBuscar)
-                                    .addComponent(jTextFieldSaldobaja, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(58, 58, 58))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonBuscar)
+                                .addGap(57, 57, 57))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()

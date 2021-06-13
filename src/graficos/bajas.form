@@ -17,9 +17,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="262" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="235" max="-2" attributes="0"/>
               <Component id="jLabelTituloBaja" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
@@ -55,6 +55,8 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jTextFieldSaldobaja" min="-2" pref="170" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -76,7 +78,7 @@
                                               <Component id="jTextFieldFechallegadaBaja" max="32767" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -84,12 +86,9 @@
                               <Component id="jButtonLimpiar" linkSize="1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButtonReciboBaja" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="8" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButtonBuscar" linkSize="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldSaldobaja" min="-2" pref="170" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jButtonBuscar" linkSize="1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
