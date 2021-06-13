@@ -137,6 +137,11 @@ public class registro2 extends javax.swing.JFrame {
         jTextField1.setEditable(false);
 
         jTextField2.setEditable(false);
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jCheckBox1);
         jCheckBox1.setText("1 persona extra");
@@ -315,15 +320,34 @@ public class registro2 extends javax.swing.JFrame {
         else
         {
             int extras = 0;
+            int costo = 0 ;
             String nombre, ciudad, tipoHabitacion;
             int numHabi = Integer.parseInt(numH);
             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
             //SimpleDateFormat formato2 = new SimpleDateFormat("yyyy-MM-dd");
             //instanseo de variables
+            
             nombre = this.jTextFieldNombre.getText().trim();
             ciudad = this.jTextFieldCiudad.getText().trim();
             if(this.jCheckBox2.isSelected()) extras = 2;
             if(this.jCheckBox1.isSelected()) extras = 1;
+            if(this.jCheckBox2.isSelected()) costo += 200;
+            if(this.jCheckBox1.isSelected()) costo += 100;
+                 
+                    
+                    
+                    String hab = this.jTextField2.getText().trim();
+         if (hab.equals("Sencilla")){
+              costo += 250; 
+              System.out.println("Entro habitacion sencilla");
+          }else if (hab.equals("Doble")){
+                  costo +=500; 
+                  System.out.println("Entro habitacion doble");
+          }else if(hab.equals("Triple")){
+                      costo+=750;
+                      System.out.println("Entro habitacion triple");
+                  }
+         
            // tipoHabitacion = (String) this.jComboBoxHabitacionTipo.getSelectedItem();//getSelectedIndex();
 //            numHabitacion = Integer.parseInt(this.jTextFieldHabitacionNumero.getText());
             //            numPiso = (int) this.jSpinnerNumeroPiso.getValue();
@@ -335,7 +359,7 @@ public class registro2 extends javax.swing.JFrame {
                 //UPDATE `habitaciones` SET `num_habitacion`='[value-1]',`nombre`='[value-2]',`ciudad`='[value-3]',`fecha_llegada`='[value-4]',`fecha_salida`='[value-5]',`tipo_habitacion`='[value-6]',`num_piso`='[value-7]',`Ocupado`='[value-8]' WHERE 1
                 String query = "UPDATE habitaciones SET num_habitacion =" + "'" + numHabi + "', nombre = " + "'" + nombre + "', ciudad =" + "'" + ciudad
                         + "'" + ", fecha_llegada = " + "'" + formato.format(this.jDateChooserFechaLlegada.getDate()) + "'" + ", fecha_salida = " + "'" + formato.format(this.jDateChooserFechaSalida.getDate()) + "'"
-                       + ", tipo_habitacion = " + "'" + this.jTextField2.getText().trim() + "'" + ", num_piso = " + "'" + this.jTextField1.getText().trim() + "'" + ", Ocupado = 1" + ", Extras = " + "'" + extras + "'" + " WHERE num_habitacion = " + "'" + numHabi + "'";
+                       + ", tipo_habitacion = " + "'" + this.jTextField2.getText().trim() + "'" + ", num_piso = " + "'" + this.jTextField1.getText().trim() + "'" + ", Ocupado = 1" + ", Extras = " + "'" + extras + "'" +",ingreso = " +"'"+ costo +"'" + " WHERE num_habitacion = " + "'" + numHabi + "'";
                 this.conn.Update(query);
                 //                String query = "INSERT INTO registro(num_habitacion, nombre, ciudad, fecha_llegada, fecha_salida, tipo_habitacion, num_personas, num_piso) VALUES ("
                 //                        + "'" + numHabitacion + "','" + nombre + "','" + ciudad + "','" + formato.format(this.jDateChooserFechaLlegada.getDate())
@@ -377,6 +401,10 @@ public class registro2 extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jTextFieldHabitacionNumeroActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     private String calcularpiso()
     {
