@@ -100,6 +100,7 @@ public class Ventana extends javax.swing.JFrame {
         jPanelIn = new javax.swing.JPanel();
         registro41 = new graficos.Registro4();
         jPanelOut = new javax.swing.JPanel();
+        bajas1 = new graficos.bajas();
         jPanelCon = new javax.swing.JPanel();
         consultasSubMenu1 = new graficos.ConsultasSubMenu();
         jPanelImg = new javax.swing.JPanel();
@@ -152,11 +153,17 @@ public class Ventana extends javax.swing.JFrame {
         jPanelOut.setLayout(jPanelOutLayout);
         jPanelOutLayout.setHorizontalGroup(
             jPanelOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1110, Short.MAX_VALUE)
+            .addGroup(jPanelOutLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bajas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(439, Short.MAX_VALUE))
         );
         jPanelOutLayout.setVerticalGroup(
             jPanelOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 514, Short.MAX_VALUE)
+            .addGroup(jPanelOutLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bajas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Salida", jPanelOut);
@@ -364,6 +371,7 @@ public class Ventana extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private graficos.bajas bajas1;
     private graficos.registro basura;
     private graficos.ConsultasSubMenu consultasSubMenu1;
     private javax.swing.JButton jButtonAgregarImg;

@@ -38,44 +38,109 @@ MySqlConn conn = new MySqlConn();
        public bajas() {
         initComponents();
     }
+       
 public void limpiar(){
     
     jTextFieldHabitacionBaja.setText(null);
     jTextFieldNombreHuesped.setText(null);
- 
-    
+    jTextFieldSaldobaja.setText(null);
     jCheckBoxServicioCuarto.setSelected(false);
     jCheckBoxServicioBar.setSelected(false);
     jCheckBoxServicioTintoreria.setSelected(false);
     jCheckBoxServicioSpa.setSelected(false);        
     jCheckBoxServicioNiñera.setSelected(false);
-
-    
 }
-    /*public Connection getConnection(){
-        
-              Connection conexion= null; 
-        
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
+
+private void sumahuesped (int costo, int numHabi){
+    System.out.println("Entro a suma de ingresos por huesped \nValor de 'costo': "+costo);
+    System.out.println("Numero de habitacion: "+numHabi);
+    ResultSet resultados = null;
+    ResultSet rs = null;
+    PreparedStatement ps = null;
+    Statement estado = null;
+    int numH = numHabi; 
+    int dinero=costo;
+   try{
+         /*"UPDATE habitaciones SET num_habitacion = " + " , ingreso = " + "'"+ costo + "' " +  "WHERE num_habitacion = " + "'" + numHabi + "'";   {*/
+           /*  String query = "UPDATE habitaciones SET num_habitacion = " + " ' , ingreso = " + " ' " + costo + "' " +  "WHERE num_habitacion = " + "'" + numHabi + "'";*/
+
+     String query = "UPDATE habitaciones SET ingreso = "+ "'" + costo +"'" + " WHERE num_habitacion = " + "'" + numHabi + " '";
+     this.conn.Update(query);
+      JOptionPane.showMessageDialog(this, "Informacion subida");//(true, "Informacion subida");
+      /*this.conservar(costo, numHabi);*/
+     this.sumafinal(costo, numH);
+                }catch(Exception ex)
+                {
+                    JOptionPane.showMessageDialog(this, "Error al subir archivos");
+                    System.out.println(ex);
+                    
+                }
           
-            conexion = (Connection)DriverManager.getConnection(URL, usuario, contraseña);
-            JOptionPane.showMessageDialog(null, "Conexion exitosa");
-        }catch(Exception ex){
-            System.err.println("Error," +ex);
-            
-        }
-        return conexion; 
-            
-            
-        }
-        
-        
-    */
+               
+            }
+
+private void upbasedatos (int aux){
+    
+    System.out.println("Entro a upbasedatos datos \nValor de 'costo': "+aux);
+    ResultSet resultados = null;
+    ResultSet rs = null;
+    PreparedStatement ps = null;
+    Statement estado = null;
+   
+    
+    
+      String query = "UPDATE ingresostotales SET ingresos  =" + "'" + aux + "'" ;  
+           try {
+               this.conn.Update(query);
+                estado = (Statement) this.conn.conn.createStatement();
+               /*resultados = estado.executeQuery(query);*/
+                
+                
+         /*while(resultados.next()){
+             
+               resultados.getBlob(1);
+               
+               aux = resultados.getInt(11);
+               
+         }*/
+     }catch(SQLException ex) {
+                  JOptionPane.showMessageDialog(this, "Error en la base de datos"+ ex); 
+                  System.out.println("Error: "+ex);
+     }
+}
 
 
-         private void Habitaciones(int numH, String nummH)
-    {
+private void sumafinal (int costo, int numhabi){
+    System.out.println("Entro a suma de ingresos final del hotel \n Valor de 'costo': "+costo);
+ 
+    ResultSet resultados = null;
+    ResultSet rs = null;
+    PreparedStatement ps = null;
+    Statement estado = null;
+    int aux = 0;
+    
+    
+   try{
+        
+        String query = "SELECT sum(ingreso) FROM habitaciones "/*+ "'" + numhabi + "'"*/;  
+            estado = (Statement) this.conn.conn.createStatement();
+            resultados = estado.executeQuery(query);
+           
+      while(resultados.next()){
+ 
+          resultados.getBlob(1);
+          aux = resultados.getInt(1);
+          
+          System.out.println("Suma total: "+aux );
+          this.upbasedatos(aux);
+      }
+    }catch(Exception ex)
+                {
+                    JOptionPane.showMessageDialog(this, "Error al subir archivos");
+                    System.out.println(ex);
+                }
+}
+    private void Habitaciones(int numH, String nummH){
         if(consultar(numH) == true)
         {
             registro2 x = new registro2(conn, nummH);
@@ -89,6 +154,7 @@ public void limpiar(){
             //JOptionPane.showInternalMessageDialog(this, "Habitacion ocupada");
         }
     }
+
     private boolean consultar(int numH)
     {
         String query = "SELECT * FROM habitaciones where num_habitacion = " + "'" + 
@@ -169,7 +235,13 @@ public void limpiar(){
         jButtonBuscar = new javax.swing.JButton();
         jLabeltipoHabitacion = new javax.swing.JLabel();
         jTextFieldtipoHabitacion = new javax.swing.JTextField();
-        jDateChooserFechallegada = new com.toedter.calendar.JDateChooser();
+        jTextFieldSaldobaja = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextFieldNumeroHuespedesbaja = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jTextFieldHuespedesExtrabaja = new javax.swing.JTextField();
+        jTextFieldFechallegadaBaja = new javax.swing.JTextField();
+        jTextFieldFechasalidaBaja = new javax.swing.JTextField();
 
         jLabelTituloBaja.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
         jLabelTituloBaja.setText("Menu Bajas");
@@ -246,7 +318,7 @@ public void limpiar(){
         jLabel10.setText("Fecha de salida:");
 
         jLabel11.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
-        jLabel11.setText("jLabel11");
+        jLabel11.setText("Saldo:");
 
         jButtonLimpiar.setText("Limpiar");
         jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -267,64 +339,104 @@ public void limpiar(){
 
         jTextFieldtipoHabitacion.setEditable(false);
 
+        jTextFieldSaldobaja.setEditable(false);
+        jTextFieldSaldobaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldSaldobajaActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        jLabel3.setText("Numero de  Huespedes: ");
+
+        jTextFieldNumeroHuespedesbaja.setEditable(false);
+
+        jLabel12.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        jLabel12.setText("Huespedes extra:");
+
+        jTextFieldHuespedesExtrabaja.setEditable(false);
+
+        jTextFieldFechallegadaBaja.setEditable(false);
+
+        jTextFieldFechasalidaBaja.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jButtonBaja))
-                    .addComponent(jLabeltipoHabitacion))
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldHabitacionBaja, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                            .addComponent(jTextFieldNombreHuesped)
-                            .addComponent(jCheckBoxServicioTintoreria)
-                            .addComponent(jCheckBoxServicioSpa)
-                            .addComponent(jCheckBoxServicioNiñera)
-                            .addComponent(jTextFieldtipoHabitacion))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooserFechallegada, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(118, 118, 118))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel5))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jCheckBoxServicioBar))
-                                    .addComponent(jLabel11))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonLimpiar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonReciboBaja)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                        .addComponent(jButtonBuscar)
-                        .addGap(117, 117, 117))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckBoxServicioCuarto)
-                        .addGap(0, 449, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(262, 262, 262)
                 .addComponent(jLabelTituloBaja)
                 .addGap(93, 93, 93))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(jButtonBaja))
+                            .addComponent(jLabeltipoHabitacion))
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jTextFieldHabitacionBaja, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                                        .addComponent(jTextFieldNombreHuesped)
+                                        .addComponent(jCheckBoxServicioTintoreria)
+                                        .addComponent(jCheckBoxServicioSpa)
+                                        .addComponent(jTextFieldtipoHabitacion))
+                                    .addComponent(jCheckBoxServicioCuarto))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(22, 22, 22)
+                                        .addComponent(jLabel11)
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel12)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(jTextFieldHuespedesExtrabaja))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel10)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jTextFieldFechasalidaBaja))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel9)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextFieldFechallegadaBaja)))
+                                        .addGap(118, 118, 118))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButtonLimpiar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonReciboBaja)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonBuscar)
+                                    .addComponent(jTextFieldSaldobaja, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(58, 58, 58))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldNumeroHuespedesbaja, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(55, 55, 55)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxServicioNiñera)
+                                    .addComponent(jCheckBoxServicioBar))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonBaja, jButtonBuscar, jButtonLimpiar});
@@ -335,48 +447,61 @@ public void limpiar(){
                 .addGap(23, 23, 23)
                 .addComponent(jLabelTituloBaja)
                 .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jTextFieldHabitacionBaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel9))
-                    .addComponent(jDateChooserFechallegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldNombreHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel10)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabeltipoHabitacion)
-                    .addComponent(jTextFieldtipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBoxServicioCuarto)
-                    .addComponent(jCheckBoxServicioBar))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jCheckBoxServicioTintoreria))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jCheckBoxServicioSpa))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextFieldHabitacionBaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(jTextFieldFechallegadaBaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTextFieldNombreHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel10)
+                                .addComponent(jTextFieldFechasalidaBaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabeltipoHabitacion)
+                            .addComponent(jTextFieldtipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12)
+                            .addComponent(jTextFieldHuespedesExtrabaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextFieldNumeroHuespedesbaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCheckBoxServicioCuarto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jCheckBoxServicioTintoreria, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBoxServicioSpa)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel11)
+                        .addComponent(jTextFieldSaldobaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
                     .addComponent(jCheckBoxServicioNiñera))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonBaja)
-                    .addComponent(jButtonReciboBaja)
-                    .addComponent(jButtonLimpiar)
-                    .addComponent(jButtonBuscar))
-                .addGap(44, 44, 44))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonBaja)
+                            .addComponent(jButtonReciboBaja)
+                            .addComponent(jButtonLimpiar)
+                            .addComponent(jButtonBuscar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBoxServicioBar)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonBaja, jButtonBuscar, jButtonLimpiar});
@@ -385,14 +510,53 @@ public void limpiar(){
 
     private void jButtonReciboBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReciboBajaActionPerformed
         // TODO add your handling code here:
-        int servicio = 0;
-        if(this.jCheckBoxServicioCuarto.isSelected()) servicio = 1;
-        if(this.jCheckBoxServicioTintoreria.isSelected()) servicio = 1;
-        if(this.jCheckBoxServicioSpa.isSelected()) servicio = 1;
-        if(this.jCheckBoxServicioNiñera.isSelected()) servicio = 1;
-        if(this.jCheckBoxServicioBar.isSelected()) servicio = 1;
-  
-      String query = "UPDATE habitaciones SET num_habitacion =" +    ", Extras = " + "'" + servicio ;
+        ResultSet resultados = null;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        Statement estado = null;
+        int costo = 0, valorfinal= 0;
+        int ingreso = 0 ; 
+        String numH = this.jTextFieldHabitacionBaja.getText().trim();
+        String hab = this.jTextFieldtipoHabitacion.getText().trim();
+        if (this.jCheckBoxServicioBar.isSelected()) costo += 150; 
+        if (this.jCheckBoxServicioTintoreria.isSelected()) costo +=150;
+        if (this.jCheckBoxServicioSpa.isSelected()) costo +=150;
+        if (this.jCheckBoxServicioNiñera.isSelected()) costo +=150;  
+        if (this.jCheckBoxServicioCuarto.isSelected()) costo +=150;
+          
+           String query = "SELECT * FROM habitaciones where num_habitacion = " + "'" +numH+ "'" ;  
+           try {
+
+            estado = (Statement) this.conn.conn.createStatement();
+            resultados = estado.executeQuery(query);
+
+            while(resultados.next()){
+                resultados.getBlob(1);
+
+                
+
+                valorfinal = resultados.getInt(11);
+                String saldobaja = String.valueOf(valorfinal);
+                costo+=valorfinal;
+                String saldobajas = String.valueOf(costo);
+                System.out.println("dato que estoy buscando: "+saldobajas);
+                saldobajas = resultados.getString("ingreso");
+                this.jTextFieldSaldobaja.setText(saldobajas);
+            }
+        
+           }catch(SQLException ex) {
+                  JOptionPane.showMessageDialog(this, "Error en la base de datos"+ ex); 
+               
+           }
+           
+           
+           JOptionPane.showMessageDialog(null,"Cuenta final: "+costo+ "\nTipo de habitacion: "+hab );
+           
+           
+           
+           int numHabi = Integer.parseInt(numH);
+           this.sumahuesped(costo, numHabi);
+           
     }//GEN-LAST:event_jButtonReciboBajaActionPerformed
 
     private void jTextFieldHabitacionBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHabitacionBajaActionPerformed
@@ -409,7 +573,7 @@ public void limpiar(){
             JOptionPane.showMessageDialog(this, "Numero de habitacion vacio");
         }
         else{
-            String query = "UPDATE  habitaciones SET Ocupado = 0 WHERE num_habitacion = " + "' " + numH + " '";
+           String query = "UPDATE  habitaciones SET Ocupado = 0, ingreso = 0 WHERE num_habitacion = " + "' " + numH + " '";
       
      /*UPDATE
   habitaciones
@@ -471,63 +635,46 @@ where
         PreparedStatement ps = null;
         Statement estado = null;
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-        String nombre, fecha_llegada, fecha_salida, tipo_habitacion, salida;
-       
-       nombre=this.jTextFieldHabitacionBaja.getText().trim();
-       tipo_habitacion = this.jTextFieldtipoHabitacion.getText().trim();
-      
-       
-    
-      
-        String query = "SELECT * FROM habitaciones where num_habitacion =  " + "'" + nombre+ "'" + "'"+tipo_habitacion + "'"    ;
+        String nombre, fecha_llegada, fecha_salida, tipo_habitacion, salida, ingreso, Extras, huespedes;
+        huespedes = this.jTextFieldNumeroHuespedesbaja.getText().trim();
+        nombre=this.jTextFieldHabitacionBaja.getText().trim();
+        fecha_llegada = this.jTextFieldFechallegadaBaja.getText().trim();
+        fecha_salida = this.jTextFieldFechasalidaBaja.getText().trim();
+        tipo_habitacion = this.jTextFieldtipoHabitacion.getText().trim();
+        ingreso= this.jTextFieldSaldobaja.getText().trim();
+        Extras = this.jTextFieldHuespedesExtrabaja.getText().trim();
+
+        String query = "SELECT * FROM habitaciones where num_habitacion =  " + "'" + nombre+ "'" + "'"+tipo_habitacion + "'" +"'" + fecha_llegada +"'"+ "'" + fecha_salida + "'"+ "'" + huespedes + "'"+ "'"+ Extras + "'" +"'"+ ingreso + "'";
         
         try {
             estado = (Statement) this.conn.conn.createStatement();
             resultados = estado.executeQuery(query);
             while(resultados.next()){
-                
-                
-                
+
                 nombre = resultados.getString("nombre");
                 this.jTextFieldNombreHuesped.setText(nombre); 
+                
                 tipo_habitacion = resultados.getString("tipo_habitacion");
                 this.jTextFieldtipoHabitacion.setText(tipo_habitacion);
                 
+                fecha_llegada = resultados.getString ("fecha_llegada");
+                this.jTextFieldFechallegadaBaja.setText(fecha_llegada);
                 
-              
-               /* fecha_llegada = resultados.getString("fecha_llegada");*/
-              /*  jDateChooserFechallegada.setDate(rs.getDate(fecha_llegada));*/
-               
+                fecha_salida = resultados.getString("fecha_salida");
+                this.jTextFieldFechasalidaBaja.setText(fecha_salida);
                 
-            }
-            
-            
-
-         /*   }
-        try{
-            this.conn.conn.prepareStatement()
-            conexion = getConnection(); 
-            ps = conexion.prepareStatement("select * from habitaciones where num_habitacion=?");
-            ps.setString(1,jTextFieldHabitacionBaja.getText());
-            rs = ps.executeQuery(); 
-            
-            if (rs.next()){
+                huespedes = resultados.getString ("huespedes"); 
+                this.jTextFieldNumeroHuespedesbaja.setText(huespedes);
                 
-                jTextFieldNombreHuesped.setText(rs.getString("nombre")); 
-                jTextFieldtipoHabitacion.setText(rs.getString("tipo_habitacion"));
-                jTextFieldFechallegada.setText(String.valueOf(rs.getDate("fecha_llegada")));
-                jTextFieldFechasalida.setText(String.valueOf(rs.getDate("fecha_salida")));
+                Extras = resultados.getString(("extras"));
+                this.jTextFieldHuespedesExtrabaja.setText(Extras);
                 
-            }else{
-                JOptionPane.showMessageDialog(null,"No existe esa persona");
-            }
-            conexion.close();
+                ingreso = resultados.getString("ingreso");
+                this.jTextFieldSaldobaja.setText(ingreso);
                 
-        }catch (Exception ex){
-            System.err.println("Error, "+ex);
-        }
+                System.out.println("Ingreso de la habitacion antes de servicios: "+ingreso);
         
-                }*/
+                }
             }catch (SQLException ex){
                 JOptionPane.showMessageDialog(this, "Error en la base de datos"+ ex); 
                 
@@ -538,6 +685,10 @@ where
     private void jCheckBoxServicioTintoreriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxServicioTintoreriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxServicioTintoreriaActionPerformed
+
+    private void jTextFieldSaldobajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSaldobajaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldSaldobajaActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -550,11 +701,12 @@ where
     private javax.swing.JCheckBox jCheckBoxServicioNiñera;
     private javax.swing.JCheckBox jCheckBoxServicioSpa;
     private javax.swing.JCheckBox jCheckBoxServicioTintoreria;
-    private com.toedter.calendar.JDateChooser jDateChooserFechallegada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -563,8 +715,13 @@ where
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelTituloBaja;
     private javax.swing.JLabel jLabeltipoHabitacion;
+    private javax.swing.JTextField jTextFieldFechallegadaBaja;
+    private javax.swing.JTextField jTextFieldFechasalidaBaja;
     private javax.swing.JTextField jTextFieldHabitacionBaja;
+    private javax.swing.JTextField jTextFieldHuespedesExtrabaja;
     private javax.swing.JTextField jTextFieldNombreHuesped;
+    private javax.swing.JTextField jTextFieldNumeroHuespedesbaja;
+    private javax.swing.JTextField jTextFieldSaldobaja;
     private javax.swing.JTextField jTextFieldtipoHabitacion;
     // End of variables declaration//GEN-END:variables
 
