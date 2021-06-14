@@ -127,11 +127,12 @@ public class BuscarHabitacion extends javax.swing.JPanel {
                         hab = resultados.getString("num_habitacion");
                         ocupado = resultados.getString("Ocupado");
                         nombre = resultados.getString("nombre");
-                        if(buscar.equals(hab)){
+                        if(buscar.equals(hab) && ocupado.equals("1")){
                             this.jTextFieldHuesped.setText(nombre);
                         }
-                        if(buscar.equals(hab) && ocupado.equals("0")){
+                        if(ocupado.equals("0")){
                             JOptionPane.showMessageDialog(this.jTextFieldHabitacion, "Habitacion Disponible");
+                            this.jTextFieldHuesped.setText("");
                         }
             } catch (SQLException ex) {
                JOptionPane.showMessageDialog(this.jTextFieldHabitacion,"Habitacion Inexistente");
@@ -157,12 +158,12 @@ public class BuscarHabitacion extends javax.swing.JPanel {
                         hab = resultados.getString("num_habitacion");
                         ocupado = resultados.getString("Ocupado");
                         nombre = resultados.getString("nombre");
-                        
-                        if(buscar.equals(hab)){
+                        if(buscar.equals(hab) && ocupado.equals("1")){
                             this.jTextFieldHuesped.setText(nombre);
                         }
-                        if(buscar.equals(hab) && ocupado.equals("0")){
+                        if(ocupado.equals("0")){
                             JOptionPane.showMessageDialog(this.jTextFieldHabitacion, "Habitacion Disponible");
+                            this.jTextFieldHuesped.setText("");
                         }
             } catch (SQLException ex) {
                JOptionPane.showMessageDialog(this.jTextFieldHabitacion,"Habitacion Inexistente");
