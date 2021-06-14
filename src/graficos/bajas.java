@@ -778,7 +778,7 @@ private void sumafinal (int costo, int numhabi){
             JOptionPane.showMessageDialog(this, "Numero de habitacion vacio");
         }
         else{
-           String query = "UPDATE  habitaciones SET Ocupado = 0, WHERE num_habitacion = " + "' " + numH + " '";
+           String query = "UPDATE  habitaciones SET Ocupado = 0 WHERE num_habitacion = " + "' " + numH + " '";
       
      /*UPDATE
   habitaciones
