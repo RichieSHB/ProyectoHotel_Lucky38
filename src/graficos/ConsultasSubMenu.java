@@ -33,6 +33,7 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelGaleria = new javax.swing.JPanel();
         jPanelIngresos = new javax.swing.JPanel();
+        ingresos1 = new consultas.Ingresos();
         jPanelGrafica = new javax.swing.JPanel();
         grafica1 = new consultas.Grafica();
         jPanelTipoHabitacion = new javax.swing.JPanel();
@@ -68,11 +69,17 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
         jPanelIngresos.setLayout(jPanelIngresosLayout);
         jPanelIngresosLayout.setHorizontalGroup(
             jPanelIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1208, Short.MAX_VALUE)
+            .addGroup(jPanelIngresosLayout.createSequentialGroup()
+                .addGap(175, 175, 175)
+                .addComponent(ingresos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(508, Short.MAX_VALUE))
         );
         jPanelIngresosLayout.setVerticalGroup(
             jPanelIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
+            .addGroup(jPanelIngresosLayout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(ingresos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(319, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ingresos", jPanelIngresos);
@@ -284,6 +291,7 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
     private consultas.Costos costos1;
     private consultas.DisponibilidadPisos disponibilidadPisos1;
     private consultas.Grafica grafica1;
+    private consultas.Ingresos ingresos1;
     private javax.swing.JPanel jPanelBuscarHabitacion;
     private javax.swing.JPanel jPanelBuscarHuesped;
     private javax.swing.JPanel jPanelCostos;
