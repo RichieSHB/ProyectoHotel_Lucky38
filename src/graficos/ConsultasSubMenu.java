@@ -40,6 +40,7 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
         jPanelDisponibilidad = new javax.swing.JPanel();
         consultaGrafica3 = new consultas.ConsultaGrafica();
         jPanelCostos = new javax.swing.JPanel();
+        costos1 = new consultas.Costos();
         jPanelBuscarHuesped = new javax.swing.JPanel();
         buscarNombre1 = new consultas.BuscarNombre();
         jPanelBuscarHabitacion = new javax.swing.JPanel();
@@ -136,11 +137,17 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
         jPanelCostos.setLayout(jPanelCostosLayout);
         jPanelCostosLayout.setHorizontalGroup(
             jPanelCostosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1208, Short.MAX_VALUE)
+            .addGroup(jPanelCostosLayout.createSequentialGroup()
+                .addGap(190, 190, 190)
+                .addComponent(costos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(498, Short.MAX_VALUE))
         );
         jPanelCostosLayout.setVerticalGroup(
             jPanelCostosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
+            .addGroup(jPanelCostosLayout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(costos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(292, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Costos", jPanelCostos);
@@ -274,6 +281,7 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
     private consultas.BuscarHabitacion buscarHabitacion1;
     private consultas.BuscarNombre buscarNombre1;
     private consultas.ConsultaGrafica consultaGrafica3;
+    private consultas.Costos costos1;
     private consultas.DisponibilidadPisos disponibilidadPisos1;
     private consultas.Grafica grafica1;
     private javax.swing.JPanel jPanelBuscarHabitacion;
