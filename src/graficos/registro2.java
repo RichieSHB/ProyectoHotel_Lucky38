@@ -329,6 +329,7 @@ public class registro2 extends javax.swing.JFrame {
         }
         else
         {
+            int costo = 0 ;
             int extras = 0;
             String nombre, ciudad, tipoHabitacion;
             int numHabi = Integer.parseInt(numH);
@@ -339,6 +340,13 @@ public class registro2 extends javax.swing.JFrame {
             ciudad = this.jTextFieldCiudad.getText().trim();
             if(this.jCheckBox2.isSelected()) extras = 2;
             if(this.jCheckBox1.isSelected()) extras = 1;
+            if(this.jCheckBox2.isSelected()) costo += 200;
+            if(this.jCheckBox1.isSelected()) costo += 100;
+            
+            String hab = this.jTextField2.getText().trim();
+      
+            
+            
            // tipoHabitacion = (String) this.jComboBoxHabitacionTipo.getSelectedItem();//getSelectedIndex();
 //            numHabitacion = Integer.parseInt(this.jTextFieldHabitacionNumero.getText());
             //            numPiso = (int) this.jSpinnerNumeroPiso.getValue();
@@ -354,6 +362,22 @@ public class registro2 extends javax.swing.JFrame {
             salida = dFormat.format(Fecha);
             
             int huespedes = (int) this.jSpinnerTotal.getValue();
+              if (hab.equals("Sencilla")){
+              costo += 250;
+              costo*= dias;
+              System.out.println("Entro habitacion sencilla");
+              System.out.println("Precio base por noche: $250\nMonto total de habitacion: $"+ costo);
+            }else if (hab.equals("Doble")){
+                  costo +=500;
+                  costo*= dias;
+                  System.out.println("Entro habitacion doble");
+                  System.out.println("Precio base por noche: $500\nMonto total de habitacion: $"+ costo);
+            }else if(hab.equals("Triple")){
+                      costo+=750;
+                      costo*= dias;
+                      System.out.println("Entro habitacion triple");
+                      System.out.println("Precio base por noche: $750\nMonto total de habitacion: $"+ costo);
+                  }
             
             ingreso = new Huesped(nombre,ciudad,this.jTextField2.getText(),this.numH,huespedes,extras,this.jDateChooserFechaLlegada.getDate(),Fecha);
             ticket = new Recibo(ingreso);
@@ -363,8 +387,14 @@ public class registro2 extends javax.swing.JFrame {
                 //UPDATE `habitaciones` SET `num_habitacion`='[value-1]',`nombre`='[value-2]',`ciudad`='[value-3]',`fecha_llegada`='[value-4]',`fecha_salida`='[value-5]',`tipo_habitacion`='[value-6]',`num_piso`='[value-7]',`Ocupado`='[value-8]' WHERE 1
                 String query = "UPDATE habitaciones SET num_habitacion =" + "'" + numHabi + "', nombre = " + "'" + nombre + "', ciudad =" + "'" + ciudad
                         + "'" + ", fecha_llegada = " + "'" + formato.format(this.jDateChooserFechaLlegada.getDate()) + "'" + ", fecha_salida = " + "'" + formato.format(Fecha) + "'"
-                       + ", tipo_habitacion = " + "'" + this.jTextField2.getText().trim() + "'" + ", num_piso = " + "'" + this.jTextField1.getText().trim() + "'" + ", Ocupado = 1" + ", Extras = " + "'" + extras + "'" + ", huespedes = '"+ huespedes + "'" + " WHERE num_habitacion = " + "'" + numHabi + "'";
+                       + ", tipo_habitacion = " + "'" + this.jTextField2.getText().trim() + "'" + ", num_piso = " + "'" + this.jTextField1.getText().trim() + "'" + ", Ocupado = 1" + ", Extras = " + "'" + extras + "'" + ", huespedes = '"+ huespedes + "'" +",ingreso = " +"'"+ costo +"'" + " WHERE num_habitacion = " + "'" + numHabi + "'";
                 this.conn.Update(query);
+                
+                               /*Roy*/ /*String query = "UPDATE habitaciones SET num_habitacion =" + "'" + numHabi + "', nombre = " + "'" + nombre + "', ciudad =" + "'" + ciudad
+                        + "'" + ", fecha_llegada = " + "'" + formato.format(this.jDateChooserFechaLlegada.getDate()) + "'" + ", fecha_salida = " + "'" + formato.format(this.jDateChooserFechaSalida.getDate()) + "'"
+                       + ", tipo_habitacion = " + "'" + this.jTextField2.getText().trim() + "'" + ", num_piso = " + "'" + this.jTextField1.getText().trim() + "'" + ", Ocupado = 1" + ", Extras = " + "'" + extras + "'" +",ingreso = " +"'"+ costo +"'" + " WHERE num_habitacion = " + "'" + numHabi + "'";
+                this.conn.Update(query);*/
+                
                 //                String query = "INSERT INTO registro(num_habitacion, nombre, ciudad, fecha_llegada, fecha_salida, tipo_habitacion, num_personas, num_piso) VALUES ("
                 //                        + "'" + numHabitacion + "','" + nombre + "','" + ciudad + "','" + formato.format(this.jDateChooserFechaLlegada.getDate())
                 //                        + "','" + formato.format(this.jDateChooserFechaSalida.getDate()) + "','" + tipoHabitacion + "','" + numPersonas + "','" + numPiso + "')";
