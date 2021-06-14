@@ -152,9 +152,9 @@ public class Costos extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonCostosActionPerformed
 
     private void jButtonVerCostosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerCostosActionPerformed
-        this.jTextFieldSencilla.setText("250");
-        this.jTextFieldDoble.setText("500");
-        this.jTextFieldTriple.setText("750");
+        this.jTextFieldSencilla.setText("$ 250");
+        this.jTextFieldDoble.setText("$ 500");
+        this.jTextFieldTriple.setText("$ 750");
     }//GEN-LAST:event_jButtonVerCostosActionPerformed
 
 
