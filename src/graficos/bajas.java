@@ -6,15 +6,30 @@
 package graficos;
 import clases.Huesped;
 import clases.Recibo;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.mysql.jdbc.Statement;
 import controlMySQL.MySqlConn;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
@@ -55,7 +70,124 @@ public void limpiar(){
     jCheckBoxServicioSpa.setSelected(false);        
     jCheckBoxServicioNiñera.setSelected(false);
 }
+private void generarpdf() throws FileNotFoundException, DocumentException, IOException{
+        
+       
+    
 
+        
+        /* 
+        Nombre logo
+        lema
+        ubicacion
+        nombre del huesped 
+        ciudad de origen
+        fecha de ingreso
+        fecha de salida
+        numero de habitacion con piso 
+        tipo de habitacion con limite de huesped 
+        total de ocupantes de la habitaicon
+        1 persona extra 2 persona extra
+        registrado completado
+        
+        */
+        
+
+           
+        ResultSet resultados = null;
+        ResultSet rs = null;
+        PreparedStatement ps = null;
+        Statement estado = null;
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+        String nombre, fecha_llegada, fecha_salida, tipo_habitacion, ingreso, Extras, huespedes;
+        huespedes = this.jTextFieldNumeroHuespedesbaja.getText().trim();
+        nombre=this.jTextFieldHabitacionBaja.getText().trim();
+        fecha_llegada = this.jTextFieldFechallegadaBaja.getText().trim();
+        fecha_salida = this.jTextFieldFechasalidaBaja.getText().trim();
+        tipo_habitacion = this.jTextFieldtipoHabitacion.getText().trim();
+        ingreso= this.jTextFieldSaldobaja.getText().trim();
+        Extras = this.jTextFieldHuespedesExtrabaja.getText().trim();
+           
+            String query2 = "SELECT * FROM habitaciones where num_habitacion =  " + "'" + nombre+ "'" + "'"+tipo_habitacion + "'" +"'" + fecha_llegada +"'"+ "'" + fecha_salida + "'"+ "'" + huespedes + "'"+ "'"+ Extras + "'" +"'"+ ingreso + "'";
+        
+        try {
+            estado = (Statement) this.conn.conn.createStatement();
+            resultados = estado.executeQuery(query2);
+            while(resultados.next()){
+
+                nombre = resultados.getString("nombre");
+                this.jTextFieldNombreHuesped.setText(nombre);
+                System.out.println("Entraste al generador del pdf\nEl nombre es: "+ nombre);
+                
+                tipo_habitacion = resultados.getString("tipo_habitacion");
+                this.jTextFieldtipoHabitacion.setText(tipo_habitacion);
+                
+                fecha_llegada = resultados.getString ("fecha_llegada");
+                this.jTextFieldFechallegadaBaja.setText(fecha_llegada);
+                
+                fecha_salida = resultados.getString("fecha_salida");
+                this.jTextFieldFechasalidaBaja.setText(fecha_salida);
+                
+                huespedes = resultados.getString ("huespedes"); 
+                this.jTextFieldNumeroHuespedesbaja.setText(huespedes);
+                
+                Extras = resultados.getString(("extras"));
+                this.jTextFieldHuespedesExtrabaja.setText(Extras);
+                
+                ingreso = resultados.getString("ingreso");
+                this.jTextFieldSaldobaja.setText(ingreso);
+                
+                System.out.println("Ingreso de la habitacion antes de servicios: "+ingreso);
+                
+                Document documentosalida = new Document(); 
+        
+                FileOutputStream PDF = new FileOutputStream("ticketsalida.pdf");
+                PdfWriter.getInstance(documentosalida, PDF) ;
+                 documentosalida.open();
+                /*542*892 */
+                Paragraph nombrehoteldoc = new Paragraph("Lucky 38");
+                 documentosalida.add(nombrehoteldoc);
+                 
+                Image logodoc = Image.getInstance("src\\imagenes\\IconoLucky38.png");
+                logodoc.scaleAbsolute(50f, 50f);
+                logodoc.setAbsolutePosition(100,800);
+                documentosalida.add(logodoc);
+                
+                Paragraph lemadoc = new Paragraph("Get The ");
+                
+                Paragraph nombredoc = new Paragraph("Nombre del Huesped: "+ nombre,FontFactory.getFont("TimesNewRoman", 18,Font.BOLD, BaseColor.BLACK));
+                nombredoc.setAlignment(Element.ALIGN_LEFT);
+                
+                
+                documentosalida.add(nombredoc);
+        
+                
+        /* 
+        Nombre logo LISTO
+        lema
+        ubicacion
+        nombre del huesped 
+        ciudad de origen
+        fecha de ingreso
+        fecha de salida
+        numero de habitacion con piso 
+        tipo de habitacion con limite de huesped 
+        total de ocupantes de la habitaicon
+        1 persona extra 2 persona extra
+        registrado completado
+        
+        */
+        
+        
+                documentosalida.close();
+                }
+            }catch (SQLException ex){
+                JOptionPane.showMessageDialog(this, "Error en la base de datos"+ ex);
+    
+    
+    
+            }
+}
 private void sumahuesped (int costo, int numHabi){
     System.out.println("Entro a suma de ingresos por huesped \nValor de 'costo': "+costo);
     System.out.println("Numero de habitacion: "+numHabi);
@@ -384,51 +516,48 @@ private void sumafinal (int costo, int numhabi){
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jButtonBaja))
                             .addComponent(jLabeltipoHabitacion))
                         .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextFieldHabitacionBaja, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                                .addComponent(jTextFieldNombreHuesped)
+                                .addComponent(jCheckBoxServicioTintoreria)
+                                .addComponent(jCheckBoxServicioSpa)
+                                .addComponent(jTextFieldtipoHabitacion))
+                            .addComponent(jCheckBoxServicioCuarto))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextFieldHabitacionBaja, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                                        .addComponent(jTextFieldNombreHuesped)
-                                        .addComponent(jCheckBoxServicioTintoreria)
-                                        .addComponent(jCheckBoxServicioSpa)
-                                        .addComponent(jTextFieldtipoHabitacion))
-                                    .addComponent(jCheckBoxServicioCuarto))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jTextFieldHuespedesExtrabaja))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextFieldFechasalidaBaja))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldFechallegadaBaja)))
+                                .addGap(57, 57, 57))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(22, 22, 22)
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextFieldSaldobaja, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButtonBaja)
                                         .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel12)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jTextFieldHuespedesExtrabaja))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel10)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jTextFieldFechasalidaBaja))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel9)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextFieldFechallegadaBaja)))
-                                        .addGap(60, 60, 60))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButtonLimpiar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonReciboBaja)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButtonBuscar)
-                                .addGap(57, 57, 57))))
+                                        .addComponent(jButtonReciboBaja))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextFieldSaldobaja, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButtonLimpiar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButtonBuscar)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -441,7 +570,7 @@ private void sumafinal (int costo, int numhabi){
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jCheckBoxServicioNiñera)
                                     .addComponent(jCheckBoxServicioBar))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 301, Short.MAX_VALUE))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonBaja, jButtonBuscar, jButtonLimpiar});
@@ -473,40 +602,44 @@ private void sumafinal (int costo, int numhabi){
                             .addComponent(jLabel12)
                             .addComponent(jTextFieldHuespedesExtrabaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jTextFieldNumeroHuespedesbaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jTextFieldNumeroHuespedesbaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(19, 19, 19)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel11)
+                                .addComponent(jTextFieldSaldobaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jCheckBoxServicioCuarto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jCheckBoxServicioTintoreria, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBoxServicioSpa)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel11)
-                        .addComponent(jTextFieldSaldobaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(jCheckBoxServicioNiñera))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonBaja)
+                        .addComponent(jButtonReciboBaja)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jCheckBoxServicioNiñera))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jCheckBoxServicioBar)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonBaja)
-                            .addComponent(jButtonReciboBaja)
                             .addComponent(jButtonLimpiar)
-                            .addComponent(jButtonBuscar)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckBoxServicioBar)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jButtonBuscar))))
+                .addGap(0, 44, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonBaja, jButtonBuscar, jButtonLimpiar});
@@ -562,6 +695,58 @@ private void sumafinal (int costo, int numhabi){
            int numHabi = Integer.parseInt(numH);
            this.sumahuesped(costo, numHabi);
            
+           
+           /* INICIA EL OTRO QUERY PARA EL PDF*/
+          
+       /* Document documentosalida = new Document(); 
+        FileOutputStream PDF = new FileOutputStream("ticketsalida.pdf");
+           
+        String nombre, fecha_llegada, fecha_salida, tipo_habitacion, salida, Extras, huespedes;
+        huespedes = this.jTextFieldNumeroHuespedesbaja.getText().trim();
+        nombre=this.jTextFieldHabitacionBaja.getText().trim();
+        fecha_llegada = this.jTextFieldFechallegadaBaja.getText().trim();
+        fecha_salida = this.jTextFieldFechasalidaBaja.getText().trim();
+        tipo_habitacion = this.jTextFieldtipoHabitacion.getText().trim();
+        /*ingreso= this.jTextFieldSaldobaja.getText().trim();
+        Extras = this.jTextFieldHuespedesExtrabaja.getText().trim();
+           
+            String query2 = "SELECT * FROM habitaciones where num_habitacion =  " + "'" + nombre+ "'" + "'"+tipo_habitacion + "'" +"'" + fecha_llegada +"'"+ "'" + fecha_salida + "'"+ "'" + huespedes + "'"+ "'"+ Extras + "'" +"'"+ ingreso + "'";
+        
+        try {
+            estado = (Statement) this.conn.conn.createStatement();
+            resultados = estado.executeQuery(query);
+            while(resultados.next()){
+
+                nombre = resultados.getString("nombre");
+                this.jTextFieldNombreHuesped.setText(nombre); 
+                
+                tipo_habitacion = resultados.getString("tipo_habitacion");
+                this.jTextFieldtipoHabitacion.setText(tipo_habitacion);
+                
+                fecha_llegada = resultados.getString ("fecha_llegada");
+                this.jTextFieldFechallegadaBaja.setText(fecha_llegada);
+                
+                fecha_salida = resultados.getString("fecha_salida");
+                this.jTextFieldFechasalidaBaja.setText(fecha_salida);
+                
+                huespedes = resultados.getString ("huespedes"); 
+                this.jTextFieldNumeroHuespedesbaja.setText(huespedes);
+                
+                Extras = resultados.getString(("extras"));
+                this.jTextFieldHuespedesExtrabaja.setText(Extras);
+                
+                /*ingreso = resultados.getString("ingreso");
+                this.jTextFieldSaldobaja.setText(ingreso);
+                
+                System.out.println("Ingreso de la habitacion antes de servicios: "+ingreso);
+        
+                }
+            }catch (SQLException ex){
+                JOptionPane.showMessageDialog(this, "Error en la base de datos"+ ex); */
+                
+            
+        /*}*/
+  
     }//GEN-LAST:event_jButtonReciboBajaActionPerformed
 
     private void jTextFieldHabitacionBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHabitacionBajaActionPerformed
@@ -678,12 +863,18 @@ where
                 this.jTextFieldSaldobaja.setText(ingreso);
                 
                 System.out.println("Ingreso de la habitacion antes de servicios: "+ingreso);
-        
+                try {
+                    this.generarpdf();
+                } catch (IOException ex) {
+                    Logger.getLogger(bajas.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 }
             }catch (SQLException ex){
                 JOptionPane.showMessageDialog(this, "Error en la base de datos"+ ex); 
                 
             
+        } catch (DocumentException ex) {
+            Logger.getLogger(bajas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
