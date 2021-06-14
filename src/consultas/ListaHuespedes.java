@@ -5,11 +5,13 @@
  */
 package consultas;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
 import controlMySQL.MySqlConn;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.logging.Level;
@@ -89,46 +91,38 @@ public class ListaHuespedes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMostrarActionPerformed
-       this.jTextArea1.setText("");
-        String query = "Select * From habitaciones";
-       Statement st;
-       ResultSet resultados;
-       String Nombre,salida;
-       int hab,objeto4,j=0,objeto5=0;
-       ArrayList <String> lista = new ArrayList();
-       ArrayList <Integer> lista1 = new ArrayList();
-       try {
+        try {
+            this.jTextArea1.setText("");
+            String query = "Select * From habitaciones";
+            Statement st;
+            ResultSet resultados;
+            String Nombre,salida,objeto4;
+            int hab;
+            ArrayList <String> lista = new ArrayList();
             st = this.conn.conn.createStatement();
             resultados = st.executeQuery(query);
             while(resultados.next()){
-                
+                objeto4 = resultados.getString("Ocupado");
                 Nombre = resultados.getString("nombre");
                 hab = resultados.getInt("num_habitacion");
-                if(Nombre.equals("")){
-                    
+                if(objeto4.equals("1") && !Nombre.equals("") ){
+                    lista.add(Nombre + "\n Habitacion: " + hab + "\n\n");
                 }else{
-                    lista.add(Nombre);
-                    lista1.add(hab);
-                    System.out.println(lista);
+                    
                 }
-                //objeto4 = lista1.get(j);
-                //lista1.set(1, objeto4);
                 Collections.sort(lista);
-            };
-            System.out.println(lista);
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Error en la base de datos");
-        }
-        System.out.println(lista);
+            }
+            ;
+            this.jTextArea1.append("Lista de Huespedes Lucky 38 \n\n");
             for (int i = 0; i < lista.size(); i++) {
                 Nombre = lista.get(i);
-                hab = lista1.get(i);
                 //Nombre = resultados.getString("nombre");
-                salida = "Habitacion: " + hab + "\n"
-                + "Nombre: " + Nombre + "\n";
-                          this.jTextArea1.append(salida);
+                salida = "Nombre: " + Nombre;
+                this.jTextArea1.append(salida);
             }
-        
+        } catch (SQLException ex) {
+            Logger.getLogger(ListaHuespedes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonMostrarActionPerformed
 
 
