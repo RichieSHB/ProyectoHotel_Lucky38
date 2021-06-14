@@ -153,27 +153,42 @@ private void generarpdf() throws FileNotFoundException, DocumentException, IOExc
                 logodoc.setAbsolutePosition(100,800);
                 documentosalida.add(logodoc);
                 
-                Paragraph lemadoc = new Paragraph("Get The ");
+                Paragraph lemadoc = new Paragraph("TAKE HER FOR A SPIN! ");
+                documentosalida.add(lemadoc);
+
+                Paragraph ubidoc = new Paragraph("Las Vegas Strip");
+                documentosalida.add(ubidoc);
                 
                 Paragraph nombredoc = new Paragraph("Nombre del Huesped: "+ nombre,FontFactory.getFont("TimesNewRoman", 18,Font.BOLD, BaseColor.BLACK));
                 nombredoc.setAlignment(Element.ALIGN_LEFT);
-                
-                
                 documentosalida.add(nombredoc);
         
+               /*  Paragraph ciudaddoc = new Paragraph("Ciudad de origen: "+ciudaddoc);
+                documentosalida.add(ubidoc);*/
+                
+                Paragraph fechaingresodoc = new Paragraph("Fecha ingreso: "+fecha_llegada);
+                documentosalida.add(fechaingresodoc);
+                
+                Paragraph fechasalidadoc = new Paragraph("Fecha ingreso: "+fecha_salida);
+                documentosalida.add(fechasalidadoc);
+                
+               /* AQUI VA EL NUMERO DE HABITACION CON PISO*/
+                
+                Paragraph tipohabi = new Paragraph("Fecha ingreso: "+fecha_salida);
+                documentosalida.add(fechasalidadoc);
                 
         /* 
         Nombre logo LISTO
-        lema
-        ubicacion
-        nombre del huesped 
-        ciudad de origen
-        fecha de ingreso
-        fecha de salida
-        numero de habitacion con piso 
-        tipo de habitacion con limite de huesped 
+        lema LISTO
+        ubicacion LISTO
+        nombre del huesped LISTO
+        ciudad de origen PENDIENTE SQL 
+        fecha de ingreso LISTO
+        fecha de salida LISTO
+        numero de habitacion con piso  PENDIENTE SQL
+        tipo de habitacion DISPONIBLE con limite de huesped PENDIENTE SQL
         total de ocupantes de la habitaicon
-        1 persona extra 2 persona extra
+        1 persona extra 2 persona extra DISPONIBLE
         registrado completado
         
         */
@@ -763,7 +778,7 @@ private void sumafinal (int costo, int numhabi){
             JOptionPane.showMessageDialog(this, "Numero de habitacion vacio");
         }
         else{
-           String query = "UPDATE  habitaciones SET Ocupado = 0, ingreso = 0 WHERE num_habitacion = " + "' " + numH + " '";
+           String query = "UPDATE  habitaciones SET Ocupado = 0, WHERE num_habitacion = " + "' " + numH + " '";
       
      /*UPDATE
   habitaciones
