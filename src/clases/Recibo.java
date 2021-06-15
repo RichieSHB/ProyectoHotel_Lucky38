@@ -21,6 +21,8 @@ public class Recibo {
             + "    Ciudad: {{Ciudad}}                       \n"
             + "    Fecha Entrada: {{Entrada}}               \n"
             + "    Fecha Salida:  {{Salida}}                \n"
+            + "    Numero de Habitacion: {{nHab}}           \n"
+            + "    Piso: {{piso}}                           \n"
             + "    Tipo de Habitacion: {{TipoHab}}          \n"
             + "                Huespedes: {{Limite}}        \n"
             + "    Personas Extra: {{Extra}}                \n"
@@ -40,6 +42,8 @@ public class Recibo {
         this.contentTicket = this.contentTicket.replace("{{Ciudad}}", this.ticket.getCiudad());
         this.contentTicket = this.contentTicket.replace("{{Entrada}}", dFormat.format(this.ticket.getEntrada()));
         this.contentTicket = this.contentTicket.replace("{{Salida}}", dFormat.format(this.ticket.getSalida()));
+        this.contentTicket = this.contentTicket.replace("{{nHab}}", this.ticket.getNumHab());
+        this.contentTicket = this.contentTicket.replace("{{piso}}", String.valueOf(this.ticket.getPiso()));
         this.contentTicket = this.contentTicket.replace("{{TipoHab}}", this.ticket.getTipohab());
         this.contentTicket = this.contentTicket.replace("{{Limite}}", String.valueOf(this.ticket.getLimite()));
         this.contentTicket = this.contentTicket.replace("{{Total}}", String.valueOf(this.ticket.getTotalOcupantes()));
