@@ -27,10 +27,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ernesto CH
@@ -70,12 +76,9 @@ public void limpiar(){
     jCheckBoxServicioSpa.setSelected(false);        
     jCheckBoxServicioNiñera.setSelected(false);
 }
-private void generarpdf() throws FileNotFoundException, DocumentException, IOException{
-        
-       
-    
 
-        
+private void generarpdf() throws FileNotFoundException, DocumentException, IOException, SQLException{
+
         /* 
         Nombre logo
         lema
@@ -99,16 +102,28 @@ private void generarpdf() throws FileNotFoundException, DocumentException, IOExc
         PreparedStatement ps = null;
         Statement estado = null;
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-        String nombre, fecha_llegada, fecha_salida, tipo_habitacion, ingreso, Extras, huespedes;
+        int costo = 0, valorfinal= 0;
+        int ingreso2 = 0 ; 
+        String nombre,ciudad, fecha_llegada, fecha_salida, tipo_habitacion, num_habitacion, num_piso, ingreso, Extras, huespedes,name ;
         huespedes = this.jTextFieldNumeroHuespedesbaja.getText().trim();
         nombre=this.jTextFieldHabitacionBaja.getText().trim();
         fecha_llegada = this.jTextFieldFechallegadaBaja.getText().trim();
         fecha_salida = this.jTextFieldFechasalidaBaja.getText().trim();
         tipo_habitacion = this.jTextFieldtipoHabitacion.getText().trim();
+        num_habitacion = this.jTextFieldNumerohabitacion.getText().trim();
+        num_piso = this.jTextFieldNumPiso.getText().trim(); 
+        ciudad = this.jTextFieldCiudadOrigen.getText().trim();
         ingreso= this.jTextFieldSaldobaja.getText().trim();
         Extras = this.jTextFieldHuespedesExtrabaja.getText().trim();
+        
+        name= this.jTextFieldGerentebaja.getText().trim();
+        if (this.jCheckBoxServicioBar.isSelected()) costo += 150; 
+        if (this.jCheckBoxServicioTintoreria.isSelected()) costo +=150;
+        if (this.jCheckBoxServicioSpa.isSelected()) costo +=150;
+        if (this.jCheckBoxServicioNiñera.isSelected()) costo +=150;  
+        if (this.jCheckBoxServicioCuarto.isSelected()) costo +=150;
            
-            String query2 = "SELECT * FROM habitaciones where num_habitacion =  " + "'" + nombre+ "'" + "'"+tipo_habitacion + "'" +"'" + fecha_llegada +"'"+ "'" + fecha_salida + "'"+ "'" + huespedes + "'"+ "'"+ Extras + "'" +"'"+ ingreso + "'";
+            String query2 = "SELECT * FROM habitaciones  where num_habitacion =  " + "'" + nombre+ "'" +"'"+ ciudad +"'" + "'" + num_habitacion +"'" + "'" + num_piso + "'"+ "'" + tipo_habitacion + "'" +"'" + fecha_llegada +"'"+ "'" + fecha_salida + "'"+ "'" + huespedes + "'"+ "'"+ Extras + "'" +"'"+ ingreso + "'";
         
         try {
             estado = (Statement) this.conn.conn.createStatement();
@@ -121,6 +136,16 @@ private void generarpdf() throws FileNotFoundException, DocumentException, IOExc
                 
                 tipo_habitacion = resultados.getString("tipo_habitacion");
                 this.jTextFieldtipoHabitacion.setText(tipo_habitacion);
+                
+                num_habitacion = resultados.getString("num_habitacion");
+                this.jTextFieldNumerohabitacion.setText(num_habitacion);
+                
+                
+                num_piso = resultados.getString("num_piso");
+                this.jTextFieldNumPiso.setText(num_piso);
+                
+                ciudad = resultados.getString("ciudad");
+                this.jTextFieldCiudadOrigen.setText(ciudad);
                 
                 fecha_llegada = resultados.getString ("fecha_llegada");
                 this.jTextFieldFechallegadaBaja.setText(fecha_llegada);
@@ -145,64 +170,258 @@ private void generarpdf() throws FileNotFoundException, DocumentException, IOExc
                 PdfWriter.getInstance(documentosalida, PDF) ;
                  documentosalida.open();
                 /*542*892 */
-                Paragraph nombrehoteldoc = new Paragraph("Lucky 38");
+                Paragraph nombrehoteldoc = new Paragraph("Lucky 38",FontFactory.getFont("TimesNewRoman", 14,Font.BOLD, BaseColor.BLACK));
+                nombrehoteldoc.setAlignment(Element.ALIGN_CENTER);
                  documentosalida.add(nombrehoteldoc);
                  
                 Image logodoc = Image.getInstance("src\\imagenes\\IconoLucky38.png");
                 logodoc.scaleAbsolute(50f, 50f);
-                logodoc.setAbsolutePosition(100,800);
+                logodoc.setAbsolutePosition(270,800);
                 documentosalida.add(logodoc);
                 
-                Paragraph lemadoc = new Paragraph("TAKE HER FOR A SPIN! ");
+                Paragraph lemadoc = new Paragraph("TAKE HER FOR A SPIN! ",FontFactory.getFont("TimesNewRoman", 14,Font.BOLD, BaseColor.BLACK));
+                lemadoc.setAlignment(Element.ALIGN_CENTER);
                 documentosalida.add(lemadoc);
 
-                Paragraph ubidoc = new Paragraph("Las Vegas Strip");
+                Paragraph ubidoc = new Paragraph("Las Vegas Strip",FontFactory.getFont("TimesNewRoman", 14,Font.BOLD, BaseColor.BLACK));
+                ubidoc.setAlignment(Element.ALIGN_CENTER);
                 documentosalida.add(ubidoc);
                 
-                Paragraph nombredoc = new Paragraph("Nombre del Huesped: "+ nombre,FontFactory.getFont("TimesNewRoman", 18,Font.BOLD, BaseColor.BLACK));
-                nombredoc.setAlignment(Element.ALIGN_LEFT);
+                Paragraph nombredoc = new Paragraph("Nombre del Huesped: "+ nombre,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                nombredoc.setAlignment(Element.ALIGN_CENTER);
                 documentosalida.add(nombredoc);
         
-               /*  Paragraph ciudaddoc = new Paragraph("Ciudad de origen: "+ciudaddoc);
-                documentosalida.add(ubidoc);*/
+                 Paragraph ciudaddoc = new Paragraph("Ciudad de origen: "+ciudad, FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                 ciudaddoc.setAlignment(Element.ALIGN_CENTER);
+
+                documentosalida.add(ciudaddoc);
                 
-                Paragraph fechaingresodoc = new Paragraph("Fecha ingreso: "+fecha_llegada);
+                Paragraph fechaingresodoc = new Paragraph("Fecha ingreso: "+fecha_llegada, FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                fechaingresodoc.setAlignment(Element.ALIGN_CENTER);
                 documentosalida.add(fechaingresodoc);
                 
-                Paragraph fechasalidadoc = new Paragraph("Fecha ingreso: "+fecha_salida);
+                Paragraph fechasalidadoc = new Paragraph("Fecha salida: "+fecha_salida, FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                fechasalidadoc.setAlignment(Element.ALIGN_CENTER);
+
                 documentosalida.add(fechasalidadoc);
+                 if (fecha_llegada.contains("-")){         
+                     
+      
+                   
+                   DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+ 
+                    try{
+                        
+                    Date d1 = df.parse(fecha_salida);
+                    Date d2 = df.parse(fecha_llegada);
+                    long diff = d1.getTime() - d2.getTime();
+                    long days = diff / (1000 * 60 * 60 * 24);
+                        System.out.println("Diferencia de dias: "+ days);
+                        
+                Paragraph difdiasdoc = new Paragraph("Dias de estancia: "+days, FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                difdiasdoc.setAlignment(Element.ALIGN_CENTER);
+                documentosalida.add(difdiasdoc);
+                    }
+                       catch (Exception e){
+                }
+
+    } 
                 
-               /* AQUI VA EL NUMERO DE HABITACION CON PISO*/
                 
-                Paragraph tipohabi = new Paragraph("Fecha ingreso: "+fecha_salida);
-                documentosalida.add(fechasalidadoc);
+                Paragraph numhabidoc = new Paragraph ("Numero de habitacion: "+num_habitacion,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK) );
+                numhabidoc.setAlignment(Element.ALIGN_CENTER);
+                documentosalida.add(numhabidoc);
                 
-        /* 
+                Paragraph numpiso = new Paragraph ("Numero de piso: "+num_piso,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK) );
+                numpiso.setAlignment(Element.ALIGN_CENTER);
+                documentosalida.add(numpiso);
+                
+                Paragraph tipohabi = new Paragraph("Tipo habitacion: "+tipo_habitacion,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                tipohabi.setAlignment(Element.ALIGN_CENTER);
+                documentosalida.add(tipohabi);
+                
+                    if (tipo_habitacion.equals("Sencilla")){
+                        
+                        int numlimite = 1;
+                        int costohab = 250;
+                        
+                        Paragraph limitehabdoc = new Paragraph("Limite de huespedes: "+numlimite,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                        limitehabdoc.setAlignment(Element.ALIGN_CENTER);
+                        documentosalida.add(limitehabdoc);
+                        Paragraph habicosto = new Paragraph("Costo de habitacion: "+costohab,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                        habicosto.setAlignment(Element.ALIGN_CENTER);
+                        documentosalida.add(habicosto);
+                        
+            }else if (tipo_habitacion.equals("Doble")){
+                
+                        int numlimite = 2;
+                        int costohab = 500;
+                        Paragraph limitehabdoc = new Paragraph("Limite de huespedes: "+numlimite,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                        limitehabdoc.setAlignment(Element.ALIGN_CENTER);
+                        documentosalida.add(limitehabdoc);
+                        Paragraph habicosto = new Paragraph("Costo de habitacion: "+costohab,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                        habicosto.setAlignment(Element.ALIGN_CENTER);
+                        documentosalida.add(habicosto);
+                        
+            }else if(tipo_habitacion.equals("Triple")){
+                        int numlimite = 3;
+                        int costohab = 750;
+
+                        Paragraph limitehabdoc = new Paragraph("Limite de huespedes: "+numlimite,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                        limitehabdoc.setAlignment(Element.ALIGN_CENTER);
+                        documentosalida.add(limitehabdoc);
+                        Paragraph habicosto = new Paragraph("Costo de habitacion: "+costohab,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                        habicosto.setAlignment(Element.ALIGN_CENTER);
+                        documentosalida.add(habicosto);
+   
+            }
+                /* AQUI BA JUNTO CON EL TIPO DE HABITACION  CON EL LIMITE DE HUESPED*/
+                /*TOTAL DE DIAS EN EL HOTEL EMPIEZA*/
+                
+                   Paragraph saldowoextra = new Paragraph ("Saldo sin cargos de servicios: "+ ingreso,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                   saldowoextra.setAlignment(Element.ALIGN_CENTER);
+                   documentosalida.add(saldowoextra);
+                 if (ingreso.contains("0")){
+                   
+                      
+               
+                    resultados.getBlob(1);
+                    
+                    valorfinal = resultados.getInt(11);
+                    String saldobaja = String.valueOf(valorfinal);
+                    costo+=valorfinal;
+                    String saldobajas = String.valueOf(costo);
+                    
+                    
+                    Paragraph saldoextra = new Paragraph ("Saldo con cargos de servicios: "+ costo,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                    saldoextra.setAlignment(Element.ALIGN_CENTER);
+
+                    documentosalida.add(saldoextra);
+                    
+                }
+                 
+                 if (this.jCheckBoxServicioBar.isSelected()){
+                     
+                     Paragraph serviciobarpdf = new Paragraph ("Servicio de Bar seleccionado $150 reflejados en la cuenta final",FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                      serviciobarpdf.setAlignment(Element.ALIGN_CENTER);
+
+                     documentosalida.add(serviciobarpdf);
+                     
+                     
+                 }        
+                 
+                 
+                  if (this.jCheckBoxServicioTintoreria.isSelected()){
+                    
+                     Paragraph serviciotintoreriapdf = new Paragraph ("Servicio de Tintoreria seleccionado $150 reflejados en la cuenta final",FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                      serviciotintoreriapdf.setAlignment(Element.ALIGN_CENTER);
+
+                     documentosalida.add(serviciotintoreriapdf);
+                     
+                     
+                 }        
+                  if (this.jCheckBoxServicioSpa.isSelected()){
+                     
+                     Paragraph serviciospapdf = new Paragraph ("Servicio de Spa seleccionado $150 reflejados en la cuenta final",FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                     serviciospapdf.setAlignment(Element.ALIGN_CENTER);
+
+                     documentosalida.add(serviciospapdf);
+                     
+                     
+                 }     
+                  if (this.jCheckBoxServicioNiñera.isSelected()){
+                     
+                     Paragraph servicioniñerapdf = new Paragraph ("Servicio de Niñera seleccionado $150 reflejados en la cuenta final",FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                     servicioniñerapdf.setAlignment(Element.ALIGN_CENTER);
+
+                     documentosalida.add(servicioniñerapdf);
+                 }   
+                  if (this.jCheckBoxServicioCuarto.isSelected()){
+                     
+                     Paragraph serviciocuartopdf = new Paragraph ("Servicio al Cuarto seleccionado $150 reflejados en la cuenta final",FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                     serviciocuartopdf.setAlignment(Element.ALIGN_CENTER);
+
+                     documentosalida.add(serviciocuartopdf);
+                 }  
+                  
+                          Paragraph huespedeshabi = new Paragraph("Total de huespedes: "+huespedes,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                                   huespedeshabi.setAlignment(Element.ALIGN_CENTER);
+
+                documentosalida.add(huespedeshabi);
+                
+                Paragraph huespedesextra = new Paragraph("Total de huespedes extra: "+Extras,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                huespedesextra.setAlignment(Element.ALIGN_CENTER);
+
+                documentosalida.add(huespedesextra);
+                  
+                  Paragraph gerente = new Paragraph ("Gerente en turno: "+name,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK) );
+                   gerente.setAlignment(Element.ALIGN_CENTER);
+   
+                  documentosalida.add(gerente);
+                /*if (this.jCheckBoxServicioBar.isSelected()) bar = "Servicio de Bar seleccionado";
+                
+                
+                 if (this.jCheckBoxServicioBar.isSelected()) bar = "Servicio de Bar seleccionado";
+                 
+                 
+                 
+                 
+                if (this.jCheckBoxServicioTintoreria.isSelected()) tintoreria = "Servicio de Tintoreria seleccionado";
+                if (this.jCheckBoxServicioSpa.isSelected()) spa = "Servicio de Spa seleccionado";
+                if (this.jCheckBoxServicioNiñera.isSelected()) niñera = "Servicio de niñera seleccionado";  
+                if (this.jCheckBoxServicioCuarto.isSelected()) cuarto = "Servicio de cuarto seleccionado";
+                
+                Paragraph saldoextra = new Paragraph (""+ bar);
+                documentosalida.add(saldoextra);*/
+
+                /* TOTAL DE DIAS EN EL HOTEL TERMINA*/ 
+             
+                String username = null;
+            
+                
+                Image firmalagio = Image.getInstance("src\\imagenes\\firmagio.png"); 
+                   firmalagio.scaleAbsolute(50f, 50f);
+                firmalagio.setAbsolutePosition(270,0);
+                documentosalida.add(logodoc);
+                
+                
+             
+                 documentosalida.close();
+                
+
+       /*
         Nombre logo LISTO
         lema LISTO
         ubicacion LISTO
+        fecha del dia PENDIENTE
         nombre del huesped LISTO
-        ciudad de origen PENDIENTE SQL 
+        ciudad de origen LISTO SQL 
         fecha de ingreso LISTO
         fecha de salida LISTO
-        numero de habitacion con piso  PENDIENTE SQL
-        tipo de habitacion DISPONIBLE con limite de huesped PENDIENTE SQL
-        total de ocupantes de la habitaicon
-        1 persona extra 2 persona extra DISPONIBLE
+        tipo de habitacion LISTO con limite de huesped LISTO SQL
+        numero de habitacion con piso  LISTO SQL
+        Costo de habitacion LISTO
+        Total de dias en el hospital LISTO
+        Total a pagar sin cargos extra PENDIENTE
+        Total a pagar con cargos extra PENDIENTE
+        Lista de cargos extra PENDIENTE
+        total de ocupantes de la habitaicon LISTO
+        1 persona extra 2 persona extra LISTO
         registrado completado
         
         */
+            
         
-        
-                documentosalida.close();
-                }
+            }  
+                
             }catch (SQLException ex){
                 JOptionPane.showMessageDialog(this, "Error en la base de datos"+ ex);
-    
-    
-    
+            
             }
-}
+       
+}       
+
+        
 private void sumahuesped (int costo, int numHabi){
     System.out.println("Entro a suma de ingresos por huesped \nValor de 'costo': "+costo);
     System.out.println("Numero de habitacion: "+numHabi);
@@ -394,6 +613,14 @@ private void sumafinal (int costo, int numhabi){
         jTextFieldHuespedesExtrabaja = new javax.swing.JTextField();
         jTextFieldFechallegadaBaja = new javax.swing.JTextField();
         jTextFieldFechasalidaBaja = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jTextFieldNumerohabitacion = new javax.swing.JTextField();
+        jTextFieldNumPiso = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jTextFieldCiudadOrigen = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jTextFieldGerentebaja = new javax.swing.JTextField();
 
         jLabelTituloBaja.setFont(new java.awt.Font("Times New Roman", 2, 24)); // NOI18N
         jLabelTituloBaja.setText("Menu Bajas");
@@ -499,7 +726,7 @@ private void sumafinal (int costo, int numhabi){
         });
 
         jLabel3.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
-        jLabel3.setText("Numero de  Huespedes: ");
+        jLabel3.setText("Numero de Huespedes: ");
 
         jTextFieldNumeroHuespedesbaja.setEditable(false);
 
@@ -512,6 +739,29 @@ private void sumafinal (int costo, int numhabi){
 
         jTextFieldFechasalidaBaja.setEditable(false);
 
+        jLabel13.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        jLabel13.setText("Numero de Habitacion: ");
+
+        jLabel14.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        jLabel14.setText("Numero Piso:");
+
+        jTextFieldNumerohabitacion.setEditable(false);
+
+        jTextFieldNumPiso.setEditable(false);
+        jTextFieldNumPiso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNumPisoActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        jLabel15.setText("Ciudad de Origen:");
+
+        jTextFieldCiudadOrigen.setEditable(false);
+
+        jLabel16.setFont(new java.awt.Font("Arial", 2, 14)); // NOI18N
+        jLabel16.setText("Gerente en turno: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -523,69 +773,70 @@ private void sumafinal (int costo, int numhabi){
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabeltipoHabitacion)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel15)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jCheckBoxServicioBar)
+                    .addComponent(jTextFieldNumerohabitacion)
+                    .addComponent(jTextFieldHabitacionBaja, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                    .addComponent(jTextFieldNombreHuesped)
+                    .addComponent(jCheckBoxServicioTintoreria)
+                    .addComponent(jCheckBoxServicioSpa)
+                    .addComponent(jTextFieldtipoHabitacion)
+                    .addComponent(jCheckBoxServicioCuarto)
+                    .addComponent(jTextFieldNumeroHuespedesbaja)
+                    .addComponent(jCheckBoxServicioNiñera)
+                    .addComponent(jTextFieldCiudadOrigen))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabeltipoHabitacion))
-                        .addGap(9, 9, 9)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldFechallegadaBaja))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel14)
+                                    .addComponent(jLabel10))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldFechasalidaBaja)
+                                    .addComponent(jTextFieldHuespedesExtrabaja)
+                                    .addComponent(jTextFieldNumPiso))))
+                        .addGap(42, 42, 42))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextFieldHabitacionBaja, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
-                                .addComponent(jTextFieldNombreHuesped)
-                                .addComponent(jCheckBoxServicioTintoreria)
-                                .addComponent(jCheckBoxServicioSpa)
-                                .addComponent(jTextFieldtipoHabitacion))
-                            .addComponent(jCheckBoxServicioCuarto))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel12)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextFieldHuespedesExtrabaja))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jButtonBaja)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jButtonReciboBaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jButtonLimpiar)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextFieldFechasalidaBaja))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldFechallegadaBaja)))
-                                .addGap(57, 57, 57))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButtonBaja)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButtonReciboBaja))
+                                        .addComponent(jButtonBuscar))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel11)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jTextFieldSaldobaja, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButtonLimpiar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButtonBuscar)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextFieldSaldobaja, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
+                                .addComponent(jLabel16)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNumeroHuespedesbaja, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(55, 55, 55)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jCheckBoxServicioNiñera)
-                                    .addComponent(jCheckBoxServicioBar))))
-                        .addGap(0, 301, Short.MAX_VALUE))))
+                                .addComponent(jTextFieldGerentebaja, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(37, Short.MAX_VALUE))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonBaja, jButtonBuscar, jButtonLimpiar});
@@ -593,68 +844,89 @@ private void sumafinal (int costo, int numhabi){
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap()
                 .addComponent(jLabelTituloBaja)
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldHabitacionBaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jTextFieldFechallegadaBaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldNombreHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)
+                        .addComponent(jTextFieldFechasalidaBaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextFieldHabitacionBaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)
-                            .addComponent(jTextFieldFechallegadaBaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextFieldNombreHuesped, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel10)
-                                .addComponent(jTextFieldFechasalidaBaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabeltipoHabitacion)
-                            .addComponent(jTextFieldtipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12)
                             .addComponent(jTextFieldHuespedesExtrabaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jTextFieldCiudadOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(jTextFieldNumPiso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jTextFieldSaldobaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabeltipoHabitacion)
+                            .addComponent(jTextFieldtipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jTextFieldNumerohabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jTextFieldGerentebaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
                                     .addComponent(jTextFieldNumeroHuespedesbaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(19, 19, 19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel11)
-                                .addComponent(jTextFieldSaldobaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jCheckBoxServicioCuarto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jCheckBoxServicioTintoreria, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBoxServicioSpa)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonBaja)
-                        .addComponent(jButtonReciboBaja)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jCheckBoxServicioCuarto)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jCheckBoxServicioNiñera))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jCheckBoxServicioTintoreria, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jCheckBoxServicioBar)))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCheckBoxServicioSpa)
+                            .addComponent(jButtonLimpiar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(6, 6, 6))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jCheckBoxServicioNiñera)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBoxServicioBar)
+                            .addComponent(jLabel5)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
+                        .addGap(25, 25, 25)
+                        .addComponent(jButtonBuscar)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonLimpiar)
-                            .addComponent(jButtonBuscar))))
-                .addGap(0, 44, Short.MAX_VALUE))
+                            .addComponent(jButtonBaja)
+                            .addComponent(jButtonReciboBaja))))
+                .addGap(0, 31, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonBaja, jButtonBuscar, jButtonLimpiar});
@@ -686,8 +958,6 @@ private void sumafinal (int costo, int numhabi){
             while(resultados.next()){
                 resultados.getBlob(1);
 
-                
-
                 valorfinal = resultados.getInt(11);
                 String saldobaja = String.valueOf(valorfinal);
                 costo+=valorfinal;
@@ -695,6 +965,15 @@ private void sumafinal (int costo, int numhabi){
                 System.out.println("dato que estoy buscando: "+saldobajas);
                 saldobajas = resultados.getString("ingreso");
                 this.jTextFieldSaldobaja.setText(saldobajas);
+            }
+            
+               try {
+                    this.generarpdf();
+                } catch (IOException ex) {
+                    Logger.getLogger(bajas.class.getName()).log(Level.SEVERE, null, ex);
+                
+                } catch (DocumentException ex) {
+                Logger.getLogger(bajas.class.getName()).log(Level.SEVERE, null, ex);
             }
         
            }catch(SQLException ex) {
@@ -710,57 +989,7 @@ private void sumafinal (int costo, int numhabi){
            int numHabi = Integer.parseInt(numH);
            this.sumahuesped(costo, numHabi);
            
-           
-           /* INICIA EL OTRO QUERY PARA EL PDF*/
-          
-       /* Document documentosalida = new Document(); 
-        FileOutputStream PDF = new FileOutputStream("ticketsalida.pdf");
-           
-        String nombre, fecha_llegada, fecha_salida, tipo_habitacion, salida, Extras, huespedes;
-        huespedes = this.jTextFieldNumeroHuespedesbaja.getText().trim();
-        nombre=this.jTextFieldHabitacionBaja.getText().trim();
-        fecha_llegada = this.jTextFieldFechallegadaBaja.getText().trim();
-        fecha_salida = this.jTextFieldFechasalidaBaja.getText().trim();
-        tipo_habitacion = this.jTextFieldtipoHabitacion.getText().trim();
-        /*ingreso= this.jTextFieldSaldobaja.getText().trim();
-        Extras = this.jTextFieldHuespedesExtrabaja.getText().trim();
-           
-            String query2 = "SELECT * FROM habitaciones where num_habitacion =  " + "'" + nombre+ "'" + "'"+tipo_habitacion + "'" +"'" + fecha_llegada +"'"+ "'" + fecha_salida + "'"+ "'" + huespedes + "'"+ "'"+ Extras + "'" +"'"+ ingreso + "'";
-        
-        try {
-            estado = (Statement) this.conn.conn.createStatement();
-            resultados = estado.executeQuery(query);
-            while(resultados.next()){
 
-                nombre = resultados.getString("nombre");
-                this.jTextFieldNombreHuesped.setText(nombre); 
-                
-                tipo_habitacion = resultados.getString("tipo_habitacion");
-                this.jTextFieldtipoHabitacion.setText(tipo_habitacion);
-                
-                fecha_llegada = resultados.getString ("fecha_llegada");
-                this.jTextFieldFechallegadaBaja.setText(fecha_llegada);
-                
-                fecha_salida = resultados.getString("fecha_salida");
-                this.jTextFieldFechasalidaBaja.setText(fecha_salida);
-                
-                huespedes = resultados.getString ("huespedes"); 
-                this.jTextFieldNumeroHuespedesbaja.setText(huespedes);
-                
-                Extras = resultados.getString(("extras"));
-                this.jTextFieldHuespedesExtrabaja.setText(Extras);
-                
-                /*ingreso = resultados.getString("ingreso");
-                this.jTextFieldSaldobaja.setText(ingreso);
-                
-                System.out.println("Ingreso de la habitacion antes de servicios: "+ingreso);
-        
-                }
-            }catch (SQLException ex){
-                JOptionPane.showMessageDialog(this, "Error en la base de datos"+ ex); */
-                
-            
-        /*}*/
   
     }//GEN-LAST:event_jButtonReciboBajaActionPerformed
 
@@ -778,7 +1007,7 @@ private void sumafinal (int costo, int numhabi){
             JOptionPane.showMessageDialog(this, "Numero de habitacion vacio");
         }
         else{
-           String query = "UPDATE  habitaciones SET Ocupado = 0, WHERE num_habitacion = " + "' " + numH + " '";
+           String query = "UPDATE  habitaciones SET Ocupado = 0 WHERE num_habitacion = " + "' " + numH + " '";
       
      /*UPDATE
   habitaciones
@@ -840,14 +1069,21 @@ where
         PreparedStatement ps = null;
         Statement estado = null;
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-        String nombre, fecha_llegada, fecha_salida, tipo_habitacion, salida, ingreso, Extras, huespedes;
+         String nombre,ciudad, fecha_llegada, fecha_salida, tipo_habitacion, num_habitacion, num_piso, ingreso, Extras, huespedes,cuenta ;
         huespedes = this.jTextFieldNumeroHuespedesbaja.getText().trim();
         nombre=this.jTextFieldHabitacionBaja.getText().trim();
         fecha_llegada = this.jTextFieldFechallegadaBaja.getText().trim();
         fecha_salida = this.jTextFieldFechasalidaBaja.getText().trim();
         tipo_habitacion = this.jTextFieldtipoHabitacion.getText().trim();
+        num_habitacion = this.jTextFieldNumerohabitacion.getText().trim();
+        num_piso = this.jTextFieldNumPiso.getText().trim(); 
+        ciudad = this.jTextFieldCiudadOrigen.getText().trim();
         ingreso= this.jTextFieldSaldobaja.getText().trim();
         Extras = this.jTextFieldHuespedesExtrabaja.getText().trim();
+        cuenta = this.jTextFieldGerentebaja.getText().trim();
+        ingreso= this.jTextFieldSaldobaja.getText().trim();
+        Extras = this.jTextFieldHuespedesExtrabaja.getText().trim();
+        cuenta = this.jTextFieldGerentebaja.getText().trim();
 
         String query = "SELECT * FROM habitaciones where num_habitacion =  " + "'" + nombre+ "'" + "'"+tipo_habitacion + "'" +"'" + fecha_llegada +"'"+ "'" + fecha_salida + "'"+ "'" + huespedes + "'"+ "'"+ Extras + "'" +"'"+ ingreso + "'";
         
@@ -855,12 +1091,23 @@ where
             estado = (Statement) this.conn.conn.createStatement();
             resultados = estado.executeQuery(query);
             while(resultados.next()){
-
-                nombre = resultados.getString("nombre");
-                this.jTextFieldNombreHuesped.setText(nombre); 
                 
+                
+                nombre = resultados.getString("nombre");
+                this.jTextFieldNombreHuesped.setText(nombre);
+
                 tipo_habitacion = resultados.getString("tipo_habitacion");
                 this.jTextFieldtipoHabitacion.setText(tipo_habitacion);
+                
+                num_habitacion = resultados.getString("num_habitacion");
+                this.jTextFieldNumerohabitacion.setText(num_habitacion);
+                
+                
+                num_piso = resultados.getString("num_piso");
+                this.jTextFieldNumPiso.setText(num_piso);
+                
+                ciudad = resultados.getString("ciudad");
+                this.jTextFieldCiudadOrigen.setText(ciudad);
                 
                 fecha_llegada = resultados.getString ("fecha_llegada");
                 this.jTextFieldFechallegadaBaja.setText(fecha_llegada);
@@ -876,21 +1123,47 @@ where
                 
                 ingreso = resultados.getString("ingreso");
                 this.jTextFieldSaldobaja.setText(ingreso);
+             
+                
+                 /*String query4 = "SELECT * FROM cuentas = " + "'" + cuenta + "'";
+                 System.out.println("Entro al query cuentas generador PDF");*/
+        /*try {
+               
+                estado = (Statement) this.conn.conn.createStatement();
+                 resultados = estado.executeQuery(query4);
+                while(resultados.next()){
+ 
+         /*resultados.getBlob(1);
+          cuenta = resultados.getString(1);*/
+          {
+                
+                /*System.out.println("Resultado tomado de cuenta: "+ cuenta);
+             
+               
+                cuenta = resultados.getString("cuenta");
+                this.jTextFieldGerentebaja.setText(cuenta);*/
+              
+                }
+         /*while(resultados.next()){
+             
+               resultados.getBlob(1);
+               
+               aux = resultados.getInt(11);
+               
+         }*/}
+     /*}catch(SQLException ex) {
+                  JOptionPane.showMessageDialog(this, "Error en la base de datos"+ ex); 
+                  System.out.println("Error: "+ex);
+     }*/
+            
                 
                 System.out.println("Ingreso de la habitacion antes de servicios: "+ingreso);
-                try {
-                    this.generarpdf();
-                } catch (IOException ex) {
-                    Logger.getLogger(bajas.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                }
+            
             }catch (SQLException ex){
                 JOptionPane.showMessageDialog(this, "Error en la base de datos"+ ex); 
                 
             
-        } catch (DocumentException ex) {
-            Logger.getLogger(bajas.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            }
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jCheckBoxServicioTintoreriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxServicioTintoreriaActionPerformed
@@ -900,6 +1173,10 @@ where
     private void jTextFieldSaldobajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSaldobajaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldSaldobajaActionPerformed
+
+    private void jTextFieldNumPisoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNumPisoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNumPisoActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -916,6 +1193,10 @@ where
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -926,20 +1207,19 @@ where
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelTituloBaja;
     private javax.swing.JLabel jLabeltipoHabitacion;
+    private javax.swing.JTextField jTextFieldCiudadOrigen;
     private javax.swing.JTextField jTextFieldFechallegadaBaja;
     private javax.swing.JTextField jTextFieldFechasalidaBaja;
+    private javax.swing.JTextField jTextFieldGerentebaja;
     private javax.swing.JTextField jTextFieldHabitacionBaja;
     private javax.swing.JTextField jTextFieldHuespedesExtrabaja;
     private javax.swing.JTextField jTextFieldNombreHuesped;
+    private javax.swing.JTextField jTextFieldNumPiso;
     private javax.swing.JTextField jTextFieldNumeroHuespedesbaja;
+    private javax.swing.JTextField jTextFieldNumerohabitacion;
     private javax.swing.JTextField jTextFieldSaldobaja;
     private javax.swing.JTextField jTextFieldtipoHabitacion;
     // End of variables declaration//GEN-END:variables
 
-
-
-
-  
-
-   
+ 
 }
