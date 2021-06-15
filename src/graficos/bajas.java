@@ -344,8 +344,8 @@ private void generarpdf() throws FileNotFoundException, DocumentException, IOExc
                      documentosalida.add(serviciocuartopdf);
                  }  
                   
-                          Paragraph huespedeshabi = new Paragraph("Total de huespedes: "+huespedes,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
-                                   huespedeshabi.setAlignment(Element.ALIGN_CENTER);
+                        Paragraph huespedeshabi = new Paragraph("Total de huespedes: "+huespedes,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                         huespedeshabi.setAlignment(Element.ALIGN_CENTER);
 
                 documentosalida.add(huespedeshabi);
                 
@@ -381,8 +381,8 @@ private void generarpdf() throws FileNotFoundException, DocumentException, IOExc
                 
                 Image firmalagio = Image.getInstance("src\\imagenes\\firmagio.png"); 
                    firmalagio.scaleAbsolute(50f, 50f);
-                firmalagio.setAbsolutePosition(270,0);
-                documentosalida.add(logodoc);
+                firmalagio.setAbsolutePosition(270,380);
+                documentosalida.add(firmalagio);
                 
                 
              
