@@ -7,27 +7,19 @@ package graficos;
 
 
 import clases.Fotos;
-import java.awt.Graphics;
-import java.awt.Image;
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
 import clases.Imagenfondo;
 import controlMySQL.MySqlConn;
+import java.applet.AudioClip;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 
@@ -35,8 +27,9 @@ import javax.swing.JOptionPane;
  *
  * @author gama5
  */
-public class Ventana extends javax.swing.JFrame {
-
+public class Ventana extends javax.swing.JFrame{
+    AudioClip Sound;
+    
     /**
      * Creates new form Ventana
      */
@@ -44,14 +37,17 @@ public class Ventana extends javax.swing.JFrame {
     private int recorridoAlbum;
     Imagenfondo prueba = new Imagenfondo(1);
     MySqlConn conn;
-    
+    int i= 0;
+     
+   
     public Ventana(MySqlConn conn) {
-        this.recorridoAlbum = -1;
-        this.conn = conn;
-        this.setIconImage(new ImageIcon(getClass().getResource("/imagenes/IconoLucky38.png")).getImage()); 
-        this.setContentPane(prueba);
-        this.llenarLista();
-        initComponents();
+            this.recorridoAlbum = -1;
+            this.conn = conn;
+            this.setIconImage(new ImageIcon(getClass().getResource("/imagenes/IconoLucky38.png")).getImage());
+            this.setContentPane(prueba);
+            this.llenarLista();
+            initComponents();
+            
     }
 
     public Ventana() {
@@ -109,6 +105,7 @@ public class Ventana extends javax.swing.JFrame {
         jLabelImagenesMuestra = new javax.swing.JLabel();
         jButtonAgregarImg = new javax.swing.JButton();
         jButtonSiguienteImg = new javax.swing.JButton();
+        jButtonMusica = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hotel Lucky 38");
@@ -183,6 +180,12 @@ public class Ventana extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Consultas", jPanelCon);
 
+        jPanelImg.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanelImgMouseClicked(evt);
+            }
+        });
+
         jPanelMuestra.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabelImagen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Sanguinario.png"))); // NOI18N
@@ -215,22 +218,32 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        jButtonMusica.setText("Haga Click en Pantalla para reproducir sonido");
+        jButtonMusica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMusicaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelImgLayout = new javax.swing.GroupLayout(jPanelImg);
         jPanelImg.setLayout(jPanelImgLayout);
         jPanelImgLayout.setHorizontalGroup(
             jPanelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelImgLayout.createSequentialGroup()
-                .addGap(466, 466, 466)
-                .addComponent(jLabelImagenesMuestra)
-                .addGap(35, 520, Short.MAX_VALUE))
-            .addGroup(jPanelImgLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelMuestra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanelImgLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jButtonAgregarImg)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelImgLayout.createSequentialGroup()
+                        .addGap(466, 466, 466)
+                        .addComponent(jLabelImagenesMuestra))
+                    .addGroup(jPanelImgLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(jButtonAgregarImg)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addComponent(jButtonMusica, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
                 .addComponent(jButtonSiguienteImg)
                 .addGap(20, 20, 20))
         );
@@ -240,16 +253,21 @@ public class Ventana extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanelMuestra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelImgLayout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabelImagenesMuestra)
-                        .addContainerGap(60, Short.MAX_VALUE))
-                    .addGroup(jPanelImgLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelImgLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonAgregarImg)
                             .addComponent(jButtonSiguienteImg))
-                        .addGap(14, 14, 14))))
+                        .addGap(14, 14, 14))
+                    .addGroup(jPanelImgLayout.createSequentialGroup()
+                        .addGroup(jPanelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelImgLayout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(jLabelImagenesMuestra))
+                            .addGroup(jPanelImgLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonMusica, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(20, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Imagenes", jPanelImg);
@@ -335,7 +353,24 @@ public class Ventana extends javax.swing.JFrame {
         this.llenarLista();
     }//GEN-LAST:event_jButtonAgregarImgActionPerformed
 
-    /**
+    private void jButtonMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMusicaActionPerformed
+        if(i == 1){
+        this.jButtonMusica.setText("Iniciar, presione la pantalla");
+            Sound.stop();
+            System.out.println("Presione el botón");
+            i--;
+        }
+    }//GEN-LAST:event_jButtonMusicaActionPerformed
+
+    private void jPanelImgMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelImgMouseClicked
+        if(i == 0){
+        this.jButtonMusica.setText("Detener");
+            Sound = java.applet.Applet.newAudioClip(getClass().getResource("/imagenes/LoginMarty.wav"));
+            Sound.play();
+            i++;
+        }
+    }//GEN-LAST:event_jPanelImgMouseClicked
+                /**
      * @param args the command line arguments
      */
 //    public static void main(String args[]) {
@@ -375,6 +410,7 @@ public class Ventana extends javax.swing.JFrame {
     private graficos.registro basura;
     private graficos.ConsultasSubMenu consultasSubMenu1;
     private javax.swing.JButton jButtonAgregarImg;
+    private javax.swing.JButton jButtonMusica;
     private javax.swing.JButton jButtonSiguienteImg;
     private javax.swing.JLabel jLabelImagen;
     private javax.swing.JLabel jLabelImagenesMuestra;
