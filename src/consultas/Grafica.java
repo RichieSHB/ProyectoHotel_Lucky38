@@ -131,23 +131,31 @@ public class Grafica extends javax.swing.JPanel {
                 d = String.valueOf(dobles);
                 t = String.valueOf(tripl);
                 
+                String sen,dobless,trip;
+                sen = String.valueOf(sencilla);
+                dobless = String.valueOf(doble);
+                trip = String.valueOf(triple);
+                
                 g.setColor(Color.DARK_GRAY);
                 g.fillArc(25,80,200,200,0,en);
                 g.fillRect(250, 120,20,20);
                 g.drawString("Sencilla",275,135);
                 g.drawString(s + " %", 340, 135);
+                g.drawString(sen, 380, 135);
                 
                 g.setColor(Color.orange);
                 g.fillArc(25,80,200,200,en,dobl);
                 g.fillRect(250,150,20,20);
                 g.drawString("Doble",275,165);
                 g.drawString(d + " %", 340, 165);
+                g.drawString(dobless, 380, 165);
                 
                 g.setColor(Color.LIGHT_GRAY);
                 g.fillArc(25,80,200,200,dobl+en,tri);
                 g.fillRect(250,180,20,20);
                 g.drawString("Triple",275,195);
                 g.drawString(t + " %", 340, 195);
+                 g.drawString(trip, 380, 195);
                 
             } catch (SQLException ex) {
                 Logger.getLogger(Grafica.class.getName()).log(Level.SEVERE, null, ex);

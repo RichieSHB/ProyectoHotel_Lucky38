@@ -33,6 +33,7 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelGaleria = new javax.swing.JPanel();
         jPanelIngresos = new javax.swing.JPanel();
+        ingresos1 = new consultas.Ingresos();
         jPanelGrafica = new javax.swing.JPanel();
         grafica1 = new consultas.Grafica();
         jPanelTipoHabitacion = new javax.swing.JPanel();
@@ -40,6 +41,7 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
         jPanelDisponibilidad = new javax.swing.JPanel();
         consultaGrafica3 = new consultas.ConsultaGrafica();
         jPanelCostos = new javax.swing.JPanel();
+        costos1 = new consultas.Costos();
         jPanelBuscarHuesped = new javax.swing.JPanel();
         buscarNombre1 = new consultas.BuscarNombre();
         jPanelBuscarHabitacion = new javax.swing.JPanel();
@@ -67,11 +69,17 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
         jPanelIngresos.setLayout(jPanelIngresosLayout);
         jPanelIngresosLayout.setHorizontalGroup(
             jPanelIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1208, Short.MAX_VALUE)
+            .addGroup(jPanelIngresosLayout.createSequentialGroup()
+                .addGap(175, 175, 175)
+                .addComponent(ingresos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(508, Short.MAX_VALUE))
         );
         jPanelIngresosLayout.setVerticalGroup(
             jPanelIngresosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
+            .addGroup(jPanelIngresosLayout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(ingresos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(319, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ingresos", jPanelIngresos);
@@ -136,11 +144,17 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
         jPanelCostos.setLayout(jPanelCostosLayout);
         jPanelCostosLayout.setHorizontalGroup(
             jPanelCostosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1208, Short.MAX_VALUE)
+            .addGroup(jPanelCostosLayout.createSequentialGroup()
+                .addGap(190, 190, 190)
+                .addComponent(costos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(498, Short.MAX_VALUE))
         );
         jPanelCostosLayout.setVerticalGroup(
             jPanelCostosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 587, Short.MAX_VALUE)
+            .addGroup(jPanelCostosLayout.createSequentialGroup()
+                .addGap(97, 97, 97)
+                .addComponent(costos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(292, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Costos", jPanelCostos);
@@ -261,11 +275,10 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
             java.util.Date fecha = new Date();
             String dia = String.valueOf(fecha);
             JOptionPane.showMessageDialog(jPanelFechayHora,dia,"Fecha y Hora Actual del Sistema",1);
-            System.out.println("Selecciono si");
         }else if(op == 1){
-            System.out.println("Selecciono no");
+            System.out.println("");
         }else{
-            System.out.println("Secelcciono cancelar");
+
         }
     }//GEN-LAST:event_jPanelFechayHoraMouseEntered
 
@@ -274,8 +287,10 @@ public class ConsultasSubMenu extends javax.swing.JPanel {
     private consultas.BuscarHabitacion buscarHabitacion1;
     private consultas.BuscarNombre buscarNombre1;
     private consultas.ConsultaGrafica consultaGrafica3;
+    private consultas.Costos costos1;
     private consultas.DisponibilidadPisos disponibilidadPisos1;
     private consultas.Grafica grafica1;
+    private consultas.Ingresos ingresos1;
     private javax.swing.JPanel jPanelBuscarHabitacion;
     private javax.swing.JPanel jPanelBuscarHuesped;
     private javax.swing.JPanel jPanelCostos;

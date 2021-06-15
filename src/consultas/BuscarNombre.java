@@ -164,7 +164,7 @@ public class BuscarNombre extends javax.swing.JPanel {
     private void jTextFieldNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldNombreKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             try {
-            String buscar,nombre,hab,piso;
+            String buscar,nombre,hab,piso,ocupado;
             String correcto = null;
             buscar = this.jTextFieldNombre.getText();
             String query = "Select * From habitaciones";
@@ -173,10 +173,11 @@ public class BuscarNombre extends javax.swing.JPanel {
             st = this.conn.conn.createStatement();
             resultados = st.executeQuery(query);
             while(resultados.next()){
+                ocupado = resultados.getString("Ocupado");
                 nombre = resultados.getString("nombre");
                 hab = resultados.getString("num_habitacion");
                 piso = resultados.getString("num_piso");
-                if(buscar.equals(nombre)){
+                if(buscar.equals(nombre) && ocupado.equals("1")){
                     this.jTextFieldHabitacion.setText(hab);
                     this.jTextFieldPiso.setText(piso);
                     correcto = nombre;
