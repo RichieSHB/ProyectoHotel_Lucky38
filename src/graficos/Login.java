@@ -8,6 +8,7 @@ package graficos;
 import clases.Audio;
 import clases.Imagenfondo;
 import controlMySQL.MySqlConn;
+import java.applet.AudioClip;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -23,14 +24,15 @@ import org.apache.commons.codec.digest.DigestUtils;
  */
 public class Login extends javax.swing.JFrame {
     MySqlConn conn;
-    Audio cancion = new Audio();
+    AudioClip Sound;
     /**
      * Creates new form Login
      */
     public Login(MySqlConn conn) {
         this.setIconImage(new ImageIcon(getClass().getResource("/imagenes/IconoLucky38.png")).getImage());
         this.conn = conn;
-        cancion.ClipAudio();     
+        Sound = java.applet.Applet.newAudioClip(getClass().getResource("/imagenes/LoginMarty.wav"));
+        Sound.play();     
         initComponents();       
     }
 
@@ -155,6 +157,7 @@ public class Login extends javax.swing.JFrame {
                 if (passMySql.equals(passEncrip)) {
                     JOptionPane.showMessageDialog(this, "Bienvenido "
                             + this.conn.rs.getString(1) + " al sistema :D");
+                    Sound.stop();
                     Ventana hotel = new Ventana(conn);
                     hotel.setLocationRelativeTo(null);
                     hotel.setVisible(true);
