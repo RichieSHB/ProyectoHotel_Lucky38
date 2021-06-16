@@ -30,7 +30,9 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.logging.Level;
@@ -69,7 +71,10 @@ public void limpiar(){
     jTextFieldNumeroHuespedesbaja.setText(null);
     jTextFieldHuespedesExtrabaja.setText(null);
     jTextFieldFechasalidaBaja.setText(null);
+    jTextFieldCiudadOrigen.setText(null);
+    jTextFieldNumerohabitacion.setText(null);
     jTextFieldFechallegadaBaja.setText(null);
+    jTextFieldNumPiso.setText(null);
     jCheckBoxServicioCuarto.setSelected(false);
     jCheckBoxServicioBar.setSelected(false);
     jCheckBoxServicioTintoreria.setSelected(false);
@@ -179,6 +184,11 @@ private void generarpdf() throws FileNotFoundException, DocumentException, IOExc
                 logodoc.setAbsolutePosition(270,800);
                 documentosalida.add(logodoc);
                 
+                
+                 Paragraph nombredoc = new Paragraph("Nombre del Huesped: "+ nombre,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                nombredoc.setAlignment(Element.ALIGN_CENTER);
+                documentosalida.add(nombredoc);
+                
                 Paragraph lemadoc = new Paragraph("TAKE HER FOR A SPIN! ",FontFactory.getFont("TimesNewRoman", 14,Font.BOLD, BaseColor.BLACK));
                 lemadoc.setAlignment(Element.ALIGN_CENTER);
                 documentosalida.add(lemadoc);
@@ -187,9 +197,19 @@ private void generarpdf() throws FileNotFoundException, DocumentException, IOExc
                 ubidoc.setAlignment(Element.ALIGN_CENTER);
                 documentosalida.add(ubidoc);
                 
-                Paragraph nombredoc = new Paragraph("Nombre del Huesped: "+ nombre,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
-                nombredoc.setAlignment(Element.ALIGN_CENTER);
-                documentosalida.add(nombredoc);
+                
+                
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd HH:mm:ss");
+                  LocalDateTime now = LocalDateTime.now();
+                 
+                
+                    
+                Paragraph fechahora = new Paragraph ("Hora y Fecha: "+dtf.format(now), FontFactory.getFont("TimesNewRoman", 14,Font.BOLD, BaseColor.BLACK));
+                fechahora.setAlignment(Element.ALIGN_CENTER);
+                documentosalida.add(fechahora);
+                    
+                    
+                
         
                  Paragraph ciudaddoc = new Paragraph("Ciudad de origen: "+ciudad, FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
                  ciudaddoc.setAlignment(Element.ALIGN_CENTER);
@@ -204,7 +224,7 @@ private void generarpdf() throws FileNotFoundException, DocumentException, IOExc
                 fechasalidadoc.setAlignment(Element.ALIGN_CENTER);
 
                 documentosalida.add(fechasalidadoc);
-                 if (fecha_llegada.contains("-")){         
+                 /*if (fecha_llegada.contains("-")){         
                      
       
                    
@@ -220,12 +240,12 @@ private void generarpdf() throws FileNotFoundException, DocumentException, IOExc
                         
                 Paragraph difdiasdoc = new Paragraph("Dias de estancia: "+days, FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
                 difdiasdoc.setAlignment(Element.ALIGN_CENTER);
-                documentosalida.add(difdiasdoc);
+               
                     }
                        catch (Exception e){
                 }
 
-    } 
+    }*/ 
                 
                 
                 Paragraph numhabidoc = new Paragraph ("Numero de habitacion: "+num_habitacion,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK) );
@@ -248,9 +268,30 @@ private void generarpdf() throws FileNotFoundException, DocumentException, IOExc
                         Paragraph limitehabdoc = new Paragraph("Limite de huespedes: "+numlimite,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
                         limitehabdoc.setAlignment(Element.ALIGN_CENTER);
                         documentosalida.add(limitehabdoc);
-                        Paragraph habicosto = new Paragraph("Costo de habitacion: "+costohab,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                        Paragraph habicosto = new Paragraph("Costo de habitacion: $"+costohab,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
                         habicosto.setAlignment(Element.ALIGN_CENTER);
                         documentosalida.add(habicosto);
+                           if (fecha_llegada.contains("-")){         
+                     
+      
+                   
+                   DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+ 
+                    try{
+                        
+                    Date d1 = df.parse(fecha_salida);
+                    Date d2 = df.parse(fecha_llegada);
+                    long diff = d1.getTime() - d2.getTime();
+                    long days = diff / (1000 * 60 * 60 * 24);
+                        System.out.println("Diferencia de dias: "+ days);
+                        
+                Paragraph difdiasdoc = new Paragraph("Dias de estancia: "+days, FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                difdiasdoc.setAlignment(Element.ALIGN_CENTER);
+                documentosalida.add(difdiasdoc);
+                    }
+                       catch (Exception e){
+                }
+                           }
                         
             }else if (tipo_habitacion.equals("Doble")){
                 
@@ -293,7 +334,7 @@ private void generarpdf() throws FileNotFoundException, DocumentException, IOExc
                     String saldobajas = String.valueOf(costo);
                     
                     
-                    Paragraph saldoextra = new Paragraph ("Saldo con cargos de servicios: "+ costo,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
+                    Paragraph saldoextra = new Paragraph ("Total a pagar si hay cargos extra:: "+ costo,FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK));
                     saldoextra.setAlignment(Element.ALIGN_CENTER);
 
                     documentosalida.add(saldoextra);
@@ -358,6 +399,35 @@ private void generarpdf() throws FileNotFoundException, DocumentException, IOExc
                    gerente.setAlignment(Element.ALIGN_CENTER);
    
                   documentosalida.add(gerente);
+                  
+                       Image firmalagio = Image.getInstance("src\\imagenes\\firmagio.png"); 
+                   firmalagio.scaleAbsolute(50f, 50f);
+                firmalagio.setAbsolutePosition(270,400);
+                documentosalida.add(firmalagio);
+                  Paragraph espacio = new Paragraph (" ",FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK) );
+                  espacio.setAlignment(Element.ALIGN_CENTER);
+   
+                  documentosalida.add(espacio);
+                      Paragraph espacio2 = new Paragraph (" ",FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK) );
+                  espacio2.setAlignment(Element.ALIGN_CENTER);
+   
+                  documentosalida.add(espacio2);
+                  
+                        Paragraph espacio3 = new Paragraph (" ",FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK) );
+                  espacio3.setAlignment(Element.ALIGN_CENTER);
+   
+                  documentosalida.add(espacio3);
+                  
+                  Paragraph mensaje = new Paragraph ("Vuelva pronto, 100,000 chapas add ",FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK) );
+                  mensaje.setAlignment(Element.ALIGN_CENTER);
+   
+                  documentosalida.add(mensaje);
+                  
+                  
+                  Paragraph vuelvapronto = new Paragraph ("Salida completada",FontFactory.getFont("TimesNewRoman", 12,Font.BOLD, BaseColor.BLACK) );
+                  vuelvapronto.setAlignment(Element.ALIGN_CENTER);
+   
+                  documentosalida.add(vuelvapronto);
                 /*if (this.jCheckBoxServicioBar.isSelected()) bar = "Servicio de Bar seleccionado";
                 
                 
@@ -379,10 +449,7 @@ private void generarpdf() throws FileNotFoundException, DocumentException, IOExc
                 String username = null;
             
                 
-                Image firmalagio = Image.getInstance("src\\imagenes\\firmagio.png"); 
-                   firmalagio.scaleAbsolute(50f, 50f);
-                firmalagio.setAbsolutePosition(270,380);
-                documentosalida.add(firmalagio);
+           
                 
                 
              
