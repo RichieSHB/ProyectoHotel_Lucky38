@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -88,7 +89,7 @@ public class ConsultaGrafica extends javax.swing.JPanel {
         super.paint(g);
         if(band == true){
             int nodisponible = 0,disponible=0;
-            float total;
+            float total = 0;
             String ocupado;
             String di,nd;
             try {
@@ -105,6 +106,10 @@ public class ConsultaGrafica extends javax.swing.JPanel {
                        disponible++;
                    }
                 }
+            if(nodisponible == 30){
+                g.setColor(Color.BLACK);
+                g.drawString("!!!!HOTEL LLENO!!!!",250, 200);
+            }  
                 total = disponible+nodisponible;
                 
                 float d = disponible*100/total;
@@ -136,7 +141,7 @@ public class ConsultaGrafica extends javax.swing.JPanel {
                 
             } catch (SQLException ex) {
                 Logger.getLogger(ConsultaGrafica.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } 
         }
     }
 }
